@@ -1,0 +1,24 @@
+running develop
+running egg_info
+creating my_robot_slam.egg-info
+writing my_robot_slam.egg-info/PKG-INFO
+writing dependency_links to my_robot_slam.egg-info/dependency_links.txt
+writing entry points to my_robot_slam.egg-info/entry_points.txt
+writing requirements to my_robot_slam.egg-info/requires.txt
+writing top-level names to my_robot_slam.egg-info/top_level.txt
+writing manifest file 'my_robot_slam.egg-info/SOURCES.txt'
+reading manifest file 'my_robot_slam.egg-info/SOURCES.txt'
+writing manifest file 'my_robot_slam.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/veljkogalovic/robot_ws/install/my_robot_slam/lib/python3.10/site-packages/my-robot-slam.egg-link (link to .)
+Installing mock_laser script to /home/veljkogalovic/robot_ws/install/my_robot_slam/lib/my_robot_slam
+Installing odom_publisher script to /home/veljkogalovic/robot_ws/install/my_robot_slam/lib/my_robot_slam
+Installing slam_processor script to /home/veljkogalovic/robot_ws/install/my_robot_slam/lib/my_robot_slam
+
+Installed /home/veljkogalovic/robot_ws/build/my_robot_slam
+running symlink_data
+creating /home/veljkogalovic/robot_ws/install/my_robot_slam/share/ament_index
+creating /home/veljkogalovic/robot_ws/install/my_robot_slam/share/ament_index/resource_index
+creating /home/veljkogalovic/robot_ws/install/my_robot_slam/share/ament_index/resource_index/packages
+symbolically linking /home/veljkogalovic/robot_ws/build/my_robot_slam/resource/my_robot_slam -> /home/veljkogalovic/robot_ws/install/my_robot_slam/share/ament_index/resource_index/packages
+symbolically linking /home/veljkogalovic/robot_ws/build/my_robot_slam/package.xml -> /home/veljkogalovic/robot_ws/install/my_robot_slam/share/my_robot_slam
