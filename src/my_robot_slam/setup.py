@@ -30,6 +30,9 @@ setup(
             'battery_monitor = my_robot_slam.battery_monitor:main',
             'path_planner = my_robot_slam.path_planner:main',
             'motion_planner = my_robot_slam.motion_planner.main',
+            'desni_motor = my_robot_slam.desni_motor:main',
+            'levi_motor = my_robot_slam.levi_motor:main',
+            'komunikacija = my_robot_slam.komunikacija:main'
         ],
     },
 )
