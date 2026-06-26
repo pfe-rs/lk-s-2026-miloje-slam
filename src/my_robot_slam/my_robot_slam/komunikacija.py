@@ -11,36 +11,20 @@ class KomunikacijaArduinoNode(Node):
         self.get_logger().info("Čvor za komunikaciju sa Arduinom je pokrenut.")
 
         self.arduino = serial.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=.1)         # Sluša oba motora
-        self.levi_sub = self.create_subscription(
+        self.motor_sub = self.create_subscription(
             Int32MultiArray,
-            'podaci_levog_motora',
-            self.levi_callback,
-            10)
-            
-        self.desni_sub = self.create_subscription(
-            Int32MultiArray,
-            'podaci_desnog_motora',
-            self.desni_callback,
+            'podaci_motora',
+            self.callback,
             10)
 
-    def levi_callback(self, msg):
-        pin = 3
-        command = "F"
-        speed = msg.data[0]
-        steps = msg.data[1]
+    def callback(self, msg):
+        pin = msg.data[0]
+        command = msg.data[1]
+        speed = msg.data[2]
+        steps = msg.data[3]
 
         odgovor = self.write_read(pin, command, speed, steps)
         self.get_logger().info(f"Arduino odgovorio: {odgovor}")
-
-    def desni_callback(self, msg):
-        pin = 4
-        command = "F"
-        speed = msg.data[0]
-        steps = msg.data[1]
-
-        odgovor = self.write_read(pin, command, speed, steps)
-        self.get_logger().info(f"Arduino odgovorio: {odgovor}")
-
 
     def write_read(self, pin, command, speed, steps):
         poruka = f"{pin} {command} {speed} {steps}\n"

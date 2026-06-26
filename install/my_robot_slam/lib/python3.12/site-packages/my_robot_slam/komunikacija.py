@@ -11,46 +11,27 @@ class KomunikacijaArduinoNode(Node):
         self.get_logger().info("Čvor za komunikaciju sa Arduinom je pokrenut.")
 
         self.arduino = serial.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=.1)         # Sluša oba motora
-        self.levi_sub = self.create_subscription(
+        self.motor_sub = self.create_subscription(
             Int32MultiArray,
-            'podaci_levog_motora',
-            self.levi_callback,
-            10)
-            
-        self.desni_sub = self.create_subscription(
-            Int32MultiArray,
-            'podaci_desnog_motora',
-            self.desni_callback,
+            'podaci_motora',
+            self.callback,
             10)
 
-    def levi_callback(self, msg):
-        self.get_logger().info(f"Most primio LEVI motor: {msg.data} -> Spreman za UART/Arduino.")
-        if len(msg.data) >= 3:
-            naredba = msg.data[0]
-            brzina = msg.data[1]
-            duzina = msg.data[2]
-            
-            # Pozivamo funkciju za slanje
-            odgovor = self.write_read(naredba, brzina, duzina)
-            self.get_logger().info(f"Arduino odgovorio: {odgovor}")
+    def callback(self, msg):
+        pin = msg.data[0]
+        command = msg.data[1]
+        speed = msg.data[2]
+        steps = msg.data[3]
 
-    def desni_callback(self, msg):
-        self.get_logger().info(f"Most primio DESNI motor: {msg.data} -> Spreman za UART/Arduino.")
-        if len(msg.data) >= 3:
-            naredba = msg.data[0]
-            brzina = msg.data[1]
-            duzina = msg.data[2]
-            
-            # Pozivamo funkciju za slanje
-            odgovor = self.write_read(naredba, brzina, duzina)
-            self.get_logger().info(f"Arduino odgovorio: {odgovor}")
+        odgovor = self.write_read(pin, command, speed, steps)
+        self.get_logger().info(f"Arduino odgovorio: {odgovor}")
 
-    def write_read(self, naredba, brzina, duzina): 
-        poruka = f"{naredba} {brzina} {duzina}\n"
-        self.arduino.write(bytes(poruka, 'utf-8')) 
-        time.sleep(0.05) 
-        data = self.arduino.readline() 
-        return data
+    def write_read(self, pin, command, speed, steps):
+        poruka = f"{pin} {command} {speed} {steps}\n"
+        self.arduino.write(poruka.encode('utf-8'))
+        time.sleep(0.01)
+        odgovor = self.arduino.readline().decode('utf-8').strip()
+        return odgovor
 
 
 def main(args=None):

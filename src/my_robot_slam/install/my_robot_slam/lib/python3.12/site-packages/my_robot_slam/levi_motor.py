@@ -8,29 +8,29 @@ class LeviMotorNode(Node):
         super().__init__("levi_motor")
         self.get_logger().info("Levi motor je pokrenut i spreman.")
 
-        self.pin = 4
+        self.pin = 3
         self.komande_sub = self.create_subscription(
             Int32MultiArray,
-            'ulazne_komande',
+            'ulazne_komande_levi',
             self.komanda_callback,
             10)
 
-        self.podaci_motora_pub = self.create_publisher(Int32MultiArray, 'podaci_levog_motora', 10)
+        self.podaci_motora_pub = self.create_publisher(Int32MultiArray, 'podaci_motora', 10)
 
     def komanda_callback(self, msg):
-        if len(msg.data) >= 3:
-            naredba = msg.data[0]
-            brzina = msg.data[1]
-            duzina = msg.data[2]
+        if len(msg.data) >= 2:
+            naredba = 70 #ovo sam dodao kao ASCII vrednost za 'F', sto je fja koju prihvata arduino
+            brzina = msg.data[0]
+            duzina = msg.data[1]
             
             self.get_logger().info(f"Primljeno -> Naredba: {naredba}, Brzina: {brzina}, Dužina: {duzina} na pinu: {self.pin}")
             izlazna_poruka = Int32MultiArray()
-            izlazna_poruka.data = [naredba, brzina, duzina]
+            izlazna_poruka.data = [self.pin, naredba, brzina, duzina]
             
             self.podaci_motora_pub.publish(izlazna_poruka)
             self.get_logger().info("Podaci uspešno prosleđeni sledećem čvoru!")
         else:
-            self.get_logger().warn("Primljena poruka nema dovoljno podataka (očekuju se 3 vrednosti)!")
+            self.get_logger().warn("Primljena poruka nema dovoljno podataka (očekuju se 2 vrednosti)!")
 
 def main(args=None):
     rclpy.init(args=args)
