@@ -1,5 +1,0 @@
-[console_scripts]
-mock_laser = my_robot_slam.mock_laser:main
-odom_publisher = my_robot_slam.odom_publisher:main
-slam_processor = my_robot_slam.slam_processor:main
-
