@@ -8,6 +8,7 @@ setup.py
 ../../build/my_robot_slam/my_robot_slam.egg-info/requires.txt
 ../../build/my_robot_slam/my_robot_slam.egg-info/top_level.txt
 ../../build/my_robot_slam/my_robot_slam.egg-info/zip-safe
+my_robot_slam/MOTION_PATH_TESTER.py
 my_robot_slam/__init__.py
 my_robot_slam/battery_monitor.py
 my_robot_slam/desni_motor.py
