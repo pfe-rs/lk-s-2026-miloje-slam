@@ -1,0 +1,3 @@
+[submodule "git@github.com:pfe-rs/lk-s-2026-miloje-slam"]
+	path = git@github.com:pfe-rs/lk-s-2026-miloje-slam
+	url = https://github.com/pfe-rs/lk-s-2026-miloje-slam.git
