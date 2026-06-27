@@ -2,31 +2,37 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Int32MultiArray
+import serial
+import time
 
 class KomunikacijaArduinoNode(Node):
     def __init__(self):
         super().__init__("komunikacija_arduino")
         self.get_logger().info("Čvor za komunikaciju sa Arduinom je pokrenut.")
 
-        # Sluša oba motora
-        self.levi_sub = self.create_subscription(
+        self.arduino = serial.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=.1)         # Sluša oba motora
+        self.motor_sub = self.create_subscription(
             Int32MultiArray,
-            'podaci_levog_motora',
-            self.levi_callback,
-            10)
-            
-        self.desni_sub = self.create_subscription(
-            Int32MultiArray,
-            'podaci_desnog_motora',
-            self.desni_callback,
+            'podaci_motora',
+            self.callback,
             10)
 
-    def levi_callback(self, msg):
-        self.get_logger().info(f"Most primio LEVI motor: {msg.data} -> Spreman za UART/Arduino.")
-        # Ovde dolazi tvoj kôd za slanje preko serijskog porta (npr. import serial)
+    def callback(self, msg):
+        pin = msg.data[0]
+        command = msg.data[1]
+        speed = msg.data[2]
+        steps = msg.data[3]
 
-    def desni_callback(self, msg):
-        self.get_logger().info(f"Most primio DESNI motor: {msg.data} -> Spreman za UART/Arduino.")
+        odgovor = self.write_read(pin, command, speed, steps)
+        self.get_logger().info(f"Arduino odgovorio: {odgovor}")
+
+    def write_read(self, pin, command, speed, steps):
+        poruka = f"{pin} {command} {speed} {steps}\n"
+        self.arduino.write(poruka.encode('utf-8'))
+        time.sleep(0.01)
+        odgovor = self.arduino.readline().decode('utf-8').strip()
+        return odgovor
+
 
 def main(args=None):
     rclpy.init(args=args)

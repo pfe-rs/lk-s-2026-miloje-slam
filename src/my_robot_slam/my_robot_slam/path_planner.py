@@ -127,7 +127,7 @@ class PathPlanner(Node):
     def heuristic(self, a, b):
         return math.sqrt((a[0] - b[0])**2 + (a[1] - b[1])**2)
 
-    def get_neighbors(self, node, msg, goal):
+    def get_neighbors(self, node, msg):
         width = msg.info.width
         height = msg.info.height
         neighbors = []
@@ -142,28 +142,29 @@ class PathPlanner(Node):
 
             if 0 <= nx < width and 0 <= ny < height:
                 index = ny * width + nx
-
+                
+                # Index protection guard
                 if index >= len(msg.data):
                     continue
-
+                    
                 occupancy_value = msg.data[index]
 
-                # ALLOW SPACE IF IT'S FREE OR IF IT IS THE EXACT GOAL CELL
-                if (0 <= occupancy_value < 40) or (nx, ny) == goal:
-                    is_safe = True
-                    safety_radius = 5
-
+                # AKO JE PREBLIZU ZIDA, IZBEGNI
+                is_safe = True
+                safety_radius = 5 
+                
+                if 0 <= occupancy_value < 40: # Lowered tolerance for obstacles
+                    # Quick check around the neighbor cell to ensure no walls are too close
                     for sx in range(-safety_radius, safety_radius + 1):
                         for sy in range(-safety_radius, safety_radius + 1):
                             check_x, check_y = nx + sx, ny + sy
                             if 0 <= check_x < width and 0 <= check_y < height:
                                 check_idx = check_y * width + check_x
-                                # Only fail safety check for actual obstacles (>70)
-                                if msg.data[check_idx] > 70:
+                                if msg.data[check_idx] > 70 or msg.data[check_idx] == -1:
                                     is_safe = False
                                     break
                         if not is_safe: break
-
+                        
                     if is_safe:
                         neighbors.append(((nx, ny), cost))
 
@@ -187,7 +188,7 @@ class PathPlanner(Node):
                 path.append(start)
                 return path[::-1]
 
-            for neighbor, step_cost in self.get_neighbors(current, msg, goal):
+            for neighbor, step_cost in self.get_neighbors(current, msg):
                 tentative_g_score = g_score[current] + step_cost
 
                 if tentative_g_score < g_score.get(neighbor, float('inf')):

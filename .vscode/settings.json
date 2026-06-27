@@ -1,0 +1,13 @@
+{
+    "ROS2.distro": "jazzy",
+    "python.autoComplete.extraPaths": [
+        "/home/veljkogalovic/robot_ws/build/my_robot_slam",
+        "/home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.10/site-packages",
+        "/opt/ros/jazzy/lib/python3.12/site-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/veljkogalovic/robot_ws/build/my_robot_slam",
+        "/home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.10/site-packages",
+        "/opt/ros/jazzy/lib/python3.12/site-packages"
+    ]
+}
