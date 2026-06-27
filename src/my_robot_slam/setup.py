@@ -33,7 +33,9 @@ setup(
             'motion_planner = my_robot_slam.motion_planner:main',
             'desni_motor = my_robot_slam.desni_motor:main',
             'levi_motor = my_robot_slam.levi_motor:main',
-            'komunikacija = my_robot_slam.komunikacija:main'
+            'komunikacija = my_robot_slam.komunikacija:main',
+            'odometrija = my_robot_slam.odometrija:main',
+            'enkoder_sim = my_robot_slam.enkoder_sim:main',
         ],
     },
 )
