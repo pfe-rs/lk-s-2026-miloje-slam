@@ -20,17 +20,13 @@ class OdometrijaNode(Node):
         self.y = 0.0
         self.theta = 0.0
 
-        # Prethodna stanja za proračun diferencijala
-        self.encoderRPosPrev = 0
-        self.encoderLPosPrev = 0
-        self.prvi_prolaz = True
+        # Prethodno vreme za proračun brzina (dt)
         self.prev_time = self.get_clock().now()
 
         # --- ROS 2 SUBSCRIBER ---
-        # Slušamo topik na koji komunikacija šalje sirove vrednosti enkodera [levo, desno]
         self.encoder_sub = self.create_subscription(
             Int32MultiArray,
-            'podaci_enkodera',
+            '/podaci_enkodera',
             self.odometrija_callback,
             10)
 
@@ -38,18 +34,17 @@ class OdometrijaNode(Node):
         self.pub_odom = self.create_publisher(Odometry, '/odom', 10)
         self.tf_broadcaster = tf2_ros.TransformBroadcaster(self)
 
-        self.get_logger().info("Čvor za računanje odometrije preko ROS poruka je pokrenut!")
+        self.get_logger().info("Čvor za inkrementalnu odometriju je uspešno pokrenut!")
 
     def odometrija_callback(self, msg):
         try:
-            # Provera da li poruka sadrži bar dva podatka (levi i desni enkoder)
             if len(msg.data) < 2:
                 self.get_logger().warn("Primljena nevalidna poruka enkodera (manje od 2 elementa).")
                 return
 
-            # Pretvaramo primljene podatke iz poruke
-            encoderLPos = int(msg.data[0])
-            encoderRPos = int(msg.data[1])
+            # Pošto šalješ apsolutnu promenu (delte), ovo su direktno inkrementi
+            delta_encoder_L = int(msg.data[0])
+            delta_encoder_R = int(msg.data[1])
 
             # Proračun vremena (dt) proteklog između dva čitanja
             trenutno_vreme = self.get_clock().now()
@@ -58,21 +53,9 @@ class OdometrijaNode(Node):
             if dt <= 0.0:
                 dt = 1e-6
 
-            # Prvi prolaz služi samo da zabeležimo početne pozicije enkodera
-            if self.prvi_prolaz:
-                self.encoderLPosPrev = encoderLPos
-                self.encoderRPosPrev = encoderRPos
-                self.prvi_prolaz = False
-                self.get_logger().info("Početne pozicije enkodera uspešno zabeležene.")
-                return
-
-            # Matematika diferencijalne odometrije (pređeni put točkova)
-            SR = self.distancePerCount * (encoderRPos - self.encoderRPosPrev)
-            SL = self.distancePerCount * (encoderLPos - self.encoderLPosPrev)
-
-            # Čuvamo trenutne pozicije kao prethodne za sledeći krug
-            self.encoderRPosPrev = encoderRPos
-            self.encoderLPosPrev = encoderLPos
+            # Matematika diferencijalne odometrije (pređeni put točkova u ovom koraku)
+            SR = self.distancePerCount * delta_encoder_R
+            SL = self.distancePerCount * delta_encoder_L
 
             # Prosečni pređeni put i promena ugla
             S = (SR + SL) / 2.0
@@ -95,7 +78,7 @@ class OdometrijaNode(Node):
             v = S / dt
             omega = delta_theta / dt
 
-            # Pretvaranje ugla (Yaw) u kvaternion potreban za ROS standarde
+            # Pretvaranje ugla (Yaw) u kvaternion
             q_z = math.sin(self.theta / 2.0)
             q_w = math.cos(self.theta / 2.0)
 

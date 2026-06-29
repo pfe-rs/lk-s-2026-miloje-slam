@@ -4,10 +4,10 @@
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/path_planner.py
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/motion_planner.py
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/MOTION_PATH_TESTER.py
-/home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/levi_motor.py
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__init__.py
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/komunikacija.py
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/enkoder_sim.py
+/home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/motori.py
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/slam_processor.py
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/odometrija.py
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/desni_motor.cpython-312.pyc
@@ -16,10 +16,10 @@
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/path_planner.cpython-312.pyc
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/motion_planner.cpython-312.pyc
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/MOTION_PATH_TESTER.cpython-312.pyc
-/home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/levi_motor.cpython-312.pyc
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/__init__.cpython-312.pyc
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/komunikacija.cpython-312.pyc
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/enkoder_sim.cpython-312.pyc
+/home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/motori.cpython-312.pyc
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/slam_processor.cpython-312.pyc
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/odometrija.cpython-312.pyc
 /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/share/ament_index/resource_index/packages/my_robot_slam

@@ -11,7 +11,7 @@ class KomunikacijaArduinoNode(Node):
         self.get_logger().info("Čvor za komunikaciju sa Arduinom je pokrenut.")
 
         # Otvaranje serijske veze (timeout je stavljen na vrlo kratko da ne blokira tajmer)
-        self.arduino = serial.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=0.01)         
+        self.arduino = serial.Serial(port='/dev/rfcomm0', baudrate=9600, timeout=0.01)         
         
         # Subscriber za komande motora
         self.motor_sub = self.create_subscription(

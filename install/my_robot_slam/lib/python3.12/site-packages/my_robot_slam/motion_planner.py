@@ -2,9 +2,10 @@
 import rclpy
 from rclpy.node import Node
 from nav_msgs.msg import Path
-import serial
 import time
 import math
+from std_msgs.msg import Int32MultiArray
+
 
 class MotionController(Node):
     def __init__(self):
@@ -14,18 +15,13 @@ class MotionController(Node):
         self.STEPS_PER_METER = 795.77  # 8cm tocak i 200 steps/okretu
         self.DEFAULT_SPEED = 200       # Br. okreta po sekudni
         
-        # Serijska veza
-        try:
-            self.ser = serial.Serial('/dev/ttyACM0', 9600, timeout=0.1)
-            time.sleep(2)  # Ceka Arduino
-            self.get_logger().info("Connected to Miloje via Serial.")
-        except Exception as e:
-            self.get_logger().error(f"Serial connection failed: {e}")
-
         # Pretplata na globalni put
         self.path_sub = self.create_subscription(
-            Path, 'global_path', self.path_callback, 10
+            Path, '/path_planner', self.path_callback, 10
         )
+
+        self.pub_motion_planner = self.create_publisher(Int32MultiArray, '/podaci_motion_planner', 10)
+
  
         ### DODATI PREPTLATU NA /path_planner KOJI CITA MSG
 
@@ -78,8 +74,8 @@ class MotionController(Node):
             self.get_logger().info(f"Driving forward: {distance:.2f}m ({total_steps} steps)")
             
             ### Protokol: M A 10 [koraci] [brzina] DEFINISATI PROTOKOL!!!!!!!!!!!
-            drive_command = f"M A 10 {total_steps} {self.DEFAULT_SPEED}\n"
-            self.send_to_arduino(drive_command)
+            drive_command = f"{total_steps} {self.DEFAULT_SPEED} {total_steps} {self.DEFAULT_SPEED}\n"
+            self.podaci_motora_pub.publish(drive_command)
 
             # Izracunaj koliko do kraja kretanja
             duration_sec = total_steps / self.DEFAULT_SPEED
@@ -88,13 +84,6 @@ class MotionController(Node):
             # APDEJT POZICIJE NA KRAJU
             self.current_x = target_x
             self.current_y = target_y
-
-    def send_to_arduino(self, command_string):
-        if hasattr(self, 'ser') and self.ser.is_open:
-            self.ser.write(command_string.encode('utf-8'))
-            self.get_logger().info(f"Dispatched: {command_string.strip()}")
-        else:
-            self.get_logger().warn(f"Mock Output (No Serial): {command_string.strip()}")
 
 def main(args=None):
     rclpy.init(args=args)

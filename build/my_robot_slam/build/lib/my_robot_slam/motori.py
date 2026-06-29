@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
-#ne koristi se vise
+#nekad bio levi_motor, pa smo odustali od cvora motor, salje se direktno iz motion planera
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Int32MultiArray
 
-class DesniMotorNode(Node):
+class LeviMotorNode(Node):
     def __init__(self):
-        super().__init__("desni_motor")
-        self.get_logger().info("Desni motor je pokrenut i spreman.")
+        super().__init__("levi_motor")
+        self.get_logger().info("Levi motor je pokrenut i spreman.")
 
-        self.pin = 4  # Pin za desni motor
+        self.pin = 3
         self.komande_sub = self.create_subscription(
             Int32MultiArray,
-            'ulazne_komande_desni',
+            'ulazne_komande_levi',
             self.komanda_callback,
             10)
 
-        self.podaci_motora_pub = self.create_publisher(Int32MultiArray, 'podaci_desnog_motora', 10)
+        self.podaci_motora_pub = self.create_publisher(Int32MultiArray, 'podaci_levog_motora', 10)
 
     def komanda_callback(self, msg):
         if len(msg.data) >= 2:
@@ -29,14 +29,14 @@ class DesniMotorNode(Node):
             izlazna_poruka.data = [self.pin, naredba, brzina, duzina]
             
             self.podaci_motora_pub.publish(izlazna_poruka)
-            self.get_logger().info("Podaci desnog motora uspešno prosleđeni!")
+            self.get_logger().info("Podaci uspešno prosleđeni sledećem čvoru!")
         else:
-            self.get_logger().warn("Poruka za desni motor nema dovoljno podataka!")
+            self.get_logger().warn("Primljena poruka nema dovoljno podataka (očekuju se 2 vrednosti)!")
 
 def main(args=None):
     rclpy.init(args=args)
-    node = DesniMotorNode()
-    node.get_logger().info("Desni motor je uspesno pokrenut!")
+    node = LeviMotorNode()
+    node.get_logger().info("Levi motor je uspesno pokrenut!")
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
