@@ -6,6 +6,8 @@ from std_msgs.msg import Int32MultiArray
 broj_stepova_po_revoluciji = 200
 poluprecnik_tocka_mm = 40
 MM_PER_STEP = (2 * poluprecnik_tocka_mm * 3.14159) / broj_stepova_po_revoluciji
+brzinaL=200
+brzinaD=200
 
 class NametnutoKretanjeNode(Node):
     def __init__(self):
@@ -39,10 +41,10 @@ class NametnutoKretanjeNode(Node):
         ciljno_x = max(0, min(ciljno_x, maks_granica))
         ciljno_y = max(0, min(ciljno_y, maks_granica))
 
-        step_x, step_y = self.izracunaj_naredbe(ciljno_x, ciljno_y)
+        step= self.izracunaj_naredbe(ciljno_x, ciljno_y)
 
         izlazna_poruka = Int32MultiArray()
-        izlazna_poruka.data = [step_x, step_y]
+        izlazna_poruka.data = [step, brzinaL, step, brzinaD]
         self.kretanje_pub.publish(izlazna_poruka)
 
         # Nakon što se proračun izvrši, ažuriramo trenutnu poziciju robota
@@ -54,13 +56,11 @@ class NametnutoKretanjeNode(Node):
         # Izračunavamo razliku u milimetrima (može biti pozitivna ili negativna)
         razlika_x = cilj_x - self.trenutno_x
         razlika_y = cilj_y - self.trenutno_y
-
-        # Pretvaramo milimetre u korake (deljenjem sa MM_PER_STEP)
-        # Koristimo int() jer stepovi moraju biti celi brojevi
-        step_x = int(razlika_x / MM_PER_STEP)
-        step_y = int(razlika_y / MM_PER_STEP)
-
-        return step_x, step_y
+        if razlika_y==0:
+            step = int(razlika_x / MM_PER_STEP)
+        elif razlika_x==0:
+            step = int(razlika_y / MM_PER_STEP)
+        return step
 
 def main(args=None):    
     rclpy.init(args=args)
