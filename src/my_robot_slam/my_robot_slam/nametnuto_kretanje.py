@@ -47,14 +47,14 @@ class NametnutoKretanjeNode(Node):
         if ciljno_x>self.trenutno_x:
             stepL=-step
             stepD=-step
-            izlazna_poruka.data = [stepL, brzinaL, stepD, brzinaD]
+            izlazna_poruka.data = [275, brzinaL, 275, brzinaD]
             self.kretanje_pub.publish(izlazna_poruka)
         elif ciljno_x<self.trenutno_x:
             stepL=step
             stepD=step
-            izlazna_poruka.data = [stepL, brzinaL, stepD, brzinaD]
+            izlazna_poruka.data = [-275, brzinaL, -275, brzinaD]
             self.kretanje_pub.publish(izlazna_poruka)
-            
+
         if ciljno_y>self.trenutno_y:
             stepL=-step
             stepD=step
