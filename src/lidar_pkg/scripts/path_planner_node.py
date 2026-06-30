@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # ODREDJUJE GDE TREBA ICI OD REZULTATA MAPE
 from nav_msgs.msg import Odometry
 import rclpy
