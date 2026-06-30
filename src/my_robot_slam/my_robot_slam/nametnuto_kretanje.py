@@ -33,7 +33,7 @@ class NametnutoKretanjeNode(Node):
         self.trenutno_y = 440
 
         # 0 = gleda duž +X, 90 = gleda duž +Y, 180 = gleda duž -X, 270 = gleda duž -Y
-        self.trenutna_orijentacija = 0
+        self.trenutna_orijentacija = 90
 
         # Subscriber i Publisher
         self.kretanje_sub = self.create_subscription(
@@ -66,7 +66,7 @@ class NametnutoKretanjeNode(Node):
                 f"Šaljem komandu (L={stepL_int}, D={stepD_int}), "
                 f"čekam {vreme_cekanja:.2f}s da se izvrši."
             )
-            time.sleep(vreme_cekanja)
+            time.sleep(10)
 
     def okreni_robota(self, ciljni_ugao):
         """Okreće robota na željeni pravac prateći hardverske smerove."""
