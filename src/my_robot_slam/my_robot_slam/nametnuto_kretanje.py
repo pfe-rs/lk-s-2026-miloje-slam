@@ -2,94 +2,105 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Int32MultiArray
+import math
 
-broj_stepova_po_revoluciji = 200
-poluprecnik_tocka_mm = 40
-MM_PER_STEP = (2 * poluprecnik_tocka_mm * 3.14159) / broj_stepova_po_revoluciji
-brzinaL=200
-brzinaD=200
+# --- HARDVERSKE KONFIGURACIJE ---
+BROJ_STEPOVA_PO_REVOLUCIJI = 400  
+POLUPRECNIK_TOCKA_MM = 20         
+RAZMAK_TOCKOVA_MM = 110           
+
+# Put po jednom stepu (u mm)
+MM_PER_STEP = (2 * POLUPRECNIK_TOCKA_MM * math.pi) / BROJ_STEPOVA_PO_REVOLUCIJI
+STEPOVI_ZA_90_STEPENI = 275
+
+BRZINA_L = 200
+BRZINA_D = 200
 
 class NametnutoKretanjeNode(Node):
     def __init__(self):
         super().__init__("nametnuto_kretanje")
         self.get_logger().info("Čvor za nametnuto kretanje je pokrenut.")
-        # Početne koordinate robota u milimetrima
-        self.trenutno_x = 440 * 3 #mm od pocetnog polozaja na poligonu, a to je presek fugni dve plocice u ucionici 
-        self.trenutno_y = 440    
-
-        # Subscriber za ciljne koordinate
-        self.kretanje_sub = self.create_subscription(
-            Int32MultiArray,
-            '/podaci_kretanja',
-            self.callback,
-            10)
         
-        # Publisher za korake (stepove) motora
+        # Početne koordinate robota
+        self.trenutno_x = 440 * 3 
+        self.trenutno_y = 440    
+        
+        # 0 = gleda duž +X, 90 = gleda duž +Y, 180 = gleda duž -X, 270 = gleda duž -Y
+        self.trenutna_orijentacija = 0 
+
+        # Subscriber i Publisher
+        self.kretanje_sub = self.create_subscription(Int32MultiArray, '/podaci_kretanja', self.callback, 10)
         self.kretanje_pub = self.create_publisher(Int32MultiArray, '/podaci_motion_planner', 10)
 
+    def posalji_komandu(self, stepL, stepD):
+        """Pakuje i šalje poruku Arduinu"""
+        poruka = Int32MultiArray()
+        poruka.data = [int(stepL), BRZINA_L, int(stepD), BRZINA_D]
+        self.kretanje_pub.publish(poruka)
+
+    def okreni_robota(self, ciljni_ugao):
+        """Okreće robota na željeni pravac (0, 90, 180, 270)"""
+        razlika = (ciljni_ugao - self.trenutna_orijentacija) % 360
+        
+        if razlika == 0:
+            return  # Već gleda u dobrom pravcu
+            
+        if razlika == 90:    # Okret ulevo
+            self.posalji_komandu(-STEPOVI_ZA_90_STEPENI, STEPOVI_ZA_90_STEPENI)
+        elif razlika == 270:  # Okret udesno (360 - 270 = 90 udesno)
+            self.posalji_komandu(STEPOVI_ZA_90_STEPENI, -STEPOVI_ZA_90_STEPENI)
+        elif razlika == 180:  # Okret za 180 stepeni
+            self.posalji_komandu(STEPOVI_ZA_90_STEPENI * 2, -STEPOVI_ZA_90_STEPENI * 2)
+            
+        self.trenutna_orijentacija = ciljni_ugao
+        self.get_logger().info(f"Robot promenio pravac na: {ciljni_ugao}°")
+
     def callback(self, msg):
-        # Provera da li poruka ima tačno X i Y koordinatu
         if len(msg.data) < 2:
-            self.get_logger().warn("Primljeni podaci nemaju dovoljno elemenata (očekuje se [X, Y]).")
             return
 
-        ciljno_x = msg.data[0]
-        ciljno_y = msg.data[1]  
-
-
         maks_granica = 440 * 4
-        ciljno_x = max(0, min(ciljno_x, maks_granica))
-        ciljno_y = max(0, min(ciljno_y, maks_granica))
+        ciljno_x = max(0, min(msg.data[0], maks_granica))
+        ciljno_y = max(0, min(msg.data[1], maks_granica))
 
-        step= self.izracunaj_naredbe(ciljno_x, ciljno_y)
+        razlika_x = ciljno_x - self.trenutno_x
+        razlika_y = ciljno_y - self.trenutno_y
 
-        izlazna_poruka = Int32MultiArray()
-        if ciljno_x>self.trenutno_x:
-            stepL=-step
-            stepD=-step
-            izlazna_poruka.data = [275, brzinaL, 275, brzinaD]
-            self.kretanje_pub.publish(izlazna_poruka)
-        elif ciljno_x<self.trenutno_x:
-            stepL=step
-            stepD=step
-            izlazna_poruka.data = [-275, brzinaL, -275, brzinaD]
-            self.kretanje_pub.publish(izlazna_poruka)
+        # --- SLUČAJ 1: Kretanje duž X ose ---
+        if razlika_x != 0:
+            # Odredi gde robot treba da gleda
+            potreban_ugao = 0 if razlika_x > 0 else 180
+            self.okreni_robota(potreban_ugao)
+            
+            # Izračunaj korake za pravo i pošalji komandu
+            stepovi_pravo = abs(razlika_x) / MM_PER_STEP
+            self.posalji_komandu(stepovi_pravo, stepovi_pravo)
+            
+            self.trenutno_x = ciljno_x
 
-        if ciljno_y>self.trenutno_y:
-            stepL=-step
-            stepD=step
-            izlazna_poruka.data = [stepL, brzinaL, stepD, brzinaD]
-            self.kretanje_pub.publish(izlazna_poruka)
-        elif ciljno_y<self.trenutno_y:
-            stepL=step
-            stepD=-step
-            izlazna_poruka.data = [stepL, brzinaL, stepD, brzinaD]
-            self.kretanje_pub.publish(izlazna_poruka)
-
-        self.trenutno_x = ciljno_x
-        self.trenutno_y = ciljno_y
-
-    def izracunaj_naredbe(self, cilj_x, cilj_y):
-        # Izračunavamo razliku u milimetrima (može biti pozitivna ili negativna)
-        razlika_x = cilj_x - self.trenutno_x
-        razlika_y = cilj_y - self.trenutno_y
-        if razlika_y==0:
-            step = int(razlika_x / MM_PER_STEP)
-        elif razlika_x==0:
-            step = int(razlika_y / MM_PER_STEP)
-        return step
+        # --- SLUČAJ 2: Kretanje duž Y ose ---
+        elif razlika_y != 0:
+            # Odredi gde robot treba da gleda
+            potreban_ugao = 90 if razlika_y > 0 else 270
+            self.okreni_robota(potreban_ugao)
+            
+            # Izračunaj korake za pravo i pošalji komandu
+            stepovi_pravo = abs(razlika_y) / MM_PER_STEP
+            self.posalji_komandu(stepovi_pravo, stepovi_pravo)
+            
+            self.trenutno_y = ciljno_y
 
 def main(args=None):    
     rclpy.init(args=args)
     node = NametnutoKretanjeNode()
-    node.get_logger().info("Nametnuto kretanje je uspešno pokrenuto!")
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
         pass
     finally:
         node.destroy_node()
-        rclpy.shutdown()
+        if rclpy.ok():
+            rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
