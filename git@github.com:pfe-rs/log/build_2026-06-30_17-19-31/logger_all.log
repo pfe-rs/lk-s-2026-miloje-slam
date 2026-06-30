@@ -1,0 +1,165 @@
+[0.072s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.073s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=8, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7fa585f11cc0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7fa58624b3d0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7fa58624b3d0>>)
+[0.141s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.142s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.142s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.142s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.142s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.142s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.142s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs'
+[0.142s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.142s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.142s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.142s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.142s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.142s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.142s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.142s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.142s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam) by extensions ['ignore', 'ignore_ament_install']
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam) by extension 'ignore'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam) by extension 'ignore_ament_install'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam) by extensions ['colcon_pkg']
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam) by extension 'colcon_pkg'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam) by extensions ['colcon_meta']
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam) by extension 'colcon_meta'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam) by extensions ['ros']
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam) by extension 'ros'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam) by extensions ['cmake', 'python']
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam) by extension 'cmake'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam) by extension 'python'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam) by extensions ['python_setup_py']
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam) by extension 'python_setup_py'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/RPLidarA1Viz) by extensions ['ignore', 'ignore_ament_install']
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/RPLidarA1Viz) by extension 'ignore'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/RPLidarA1Viz) by extension 'ignore_ament_install'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/RPLidarA1Viz) by extensions ['colcon_pkg']
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/RPLidarA1Viz) by extension 'colcon_pkg'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/RPLidarA1Viz) by extensions ['colcon_meta']
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/RPLidarA1Viz) by extension 'colcon_meta'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/RPLidarA1Viz) by extensions ['ros']
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/RPLidarA1Viz) by extension 'ros'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/RPLidarA1Viz) by extensions ['cmake', 'python']
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/RPLidarA1Viz) by extension 'cmake'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/RPLidarA1Viz) by extension 'python'
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/RPLidarA1Viz) by extensions ['python_setup_py']
+[0.150s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/RPLidarA1Viz) by extension 'python_setup_py'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/build) by extensions ['ignore', 'ignore_ament_install']
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/build) by extension 'ignore'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/build) ignored
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/install) by extensions ['ignore', 'ignore_ament_install']
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/install) by extension 'ignore'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/install) ignored
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/log) by extensions ['ignore', 'ignore_ament_install']
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/log) by extension 'ignore'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/log) ignored
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src) by extensions ['ignore', 'ignore_ament_install']
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src) by extension 'ignore'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src) by extension 'ignore_ament_install'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src) by extensions ['colcon_pkg']
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src) by extension 'colcon_pkg'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src) by extensions ['colcon_meta']
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src) by extension 'colcon_meta'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src) by extensions ['ros']
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src) by extension 'ros'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src) by extensions ['cmake', 'python']
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src) by extension 'cmake'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src) by extension 'python'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src) by extensions ['python_setup_py']
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src) by extension 'python_setup_py'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src/my_robot_slam) by extensions ['ignore', 'ignore_ament_install']
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src/my_robot_slam) by extension 'ignore'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src/my_robot_slam) by extension 'ignore_ament_install'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src/my_robot_slam) by extensions ['colcon_pkg']
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src/my_robot_slam) by extension 'colcon_pkg'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src/my_robot_slam) by extensions ['colcon_meta']
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src/my_robot_slam) by extension 'colcon_meta'
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src/my_robot_slam) by extensions ['ros']
+[0.151s] Level 1:colcon.colcon_core.package_identification:_identify(lk-s-2026-miloje-slam/src/my_robot_slam) by extension 'ros'
+[0.153s] DEBUG:colcon.colcon_core.package_identification:Package 'lk-s-2026-miloje-slam/src/my_robot_slam' with type 'ros.ament_python' and name 'my_robot_slam'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.153s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.153s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.153s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.153s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.153s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.154s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.167s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.167s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.167s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'my_robot_slam' build argument 'cmake_args' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'my_robot_slam' build argument 'cmake_target' from command line to 'None'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'my_robot_slam' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.168s] Level 5:colcon.colcon_core.verb:set package 'my_robot_slam' build argument 'cmake_clean_cache' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'my_robot_slam' build argument 'cmake_clean_first' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'my_robot_slam' build argument 'cmake_force_configure' from command line to 'False'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'my_robot_slam' build argument 'ament_cmake_args' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'my_robot_slam' build argument 'catkin_cmake_args' from command line to 'None'
+[0.169s] Level 5:colcon.colcon_core.verb:set package 'my_robot_slam' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.169s] DEBUG:colcon.colcon_core.verb:Building package 'my_robot_slam' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam', 'merge_install': False, 'path': '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/lk-s-2026-miloje-slam/src/my_robot_slam', 'symlink_install': False, 'test_result_base': None}
+[0.169s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.169s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.170s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/lk-s-2026-miloje-slam/src/my_robot_slam' with build type 'ament_python'
+[0.170s] Level 1:colcon.colcon_core.shell:create_environment_hook('my_robot_slam', 'ament_prefix_path')
+[0.171s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.171s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/share/my_robot_slam/hook/ament_prefix_path.ps1'
+[0.172s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/share/my_robot_slam/hook/ament_prefix_path.dsv'
+[0.172s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/share/my_robot_slam/hook/ament_prefix_path.sh'
+[0.173s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.173s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.294s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/lk-s-2026-miloje-slam/src/my_robot_slam'
+[0.294s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.294s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.460s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: egg_info, install, clean, develop, easy_install, build_ext, symlink_data, test, dist_info, rotate, upload, sdist, build_scripts, build_py, setopt, bdist_dumb, install_lib, install_data, upload_docs, install_headers, bdist_rpm, build_clib, bdist, alias, install_egg_info, bdist_wheel, bdist_egg, build, register, check, saveopts, install_scripts
+[0.462s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/lk-s-2026-miloje-slam/src/my_robot_slam': PS1=📦[\u@ros2-env \W]$ PYTHONPATH=/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/lib/python3.10/site-packages: /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/my_robot_slam build --build-base /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build install --record /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/install.log --install-scripts $base/lib/my_robot_slam --single-version-externally-managed install_data
+[0.617s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/lk-s-2026-miloje-slam/src/my_robot_slam' returned '0': PS1=📦[\u@ros2-env \W]$ PYTHONPATH=/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/lib/python3.10/site-packages: /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/my_robot_slam build --build-base /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build install --record /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/install.log --install-scripts $base/lib/my_robot_slam --single-version-externally-managed install_data
+[0.619s] Level 1:colcon.colcon_core.environment:checking '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam' for CMake module files
+[0.620s] Level 1:colcon.colcon_core.environment:checking '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam' for CMake config files
+[0.620s] Level 1:colcon.colcon_core.environment:checking '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/lib'
+[0.620s] Level 1:colcon.colcon_core.environment:checking '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/bin'
+[0.620s] Level 1:colcon.colcon_core.environment:checking '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/lib/pkgconfig/my_robot_slam.pc'
+[0.620s] Level 1:colcon.colcon_core.environment:checking '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/lib/python3.10/site-packages'
+[0.620s] Level 1:colcon.colcon_core.shell:create_environment_hook('my_robot_slam', 'pythonpath')
+[0.620s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/share/my_robot_slam/hook/pythonpath.ps1'
+[0.621s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/share/my_robot_slam/hook/pythonpath.dsv'
+[0.621s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/share/my_robot_slam/hook/pythonpath.sh'
+[0.621s] Level 1:colcon.colcon_core.environment:checking '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/bin'
+[0.621s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(my_robot_slam)
+[0.622s] INFO:colcon.colcon_core.shell:Creating package script '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/share/my_robot_slam/package.ps1'
+[0.623s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/share/my_robot_slam/package.dsv'
+[0.623s] INFO:colcon.colcon_core.shell:Creating package script '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/share/my_robot_slam/package.sh'
+[0.623s] INFO:colcon.colcon_core.shell:Creating package script '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/share/my_robot_slam/package.bash'
+[0.624s] INFO:colcon.colcon_core.shell:Creating package script '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/share/my_robot_slam/package.zsh'
+[0.624s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/share/colcon-core/packages/my_robot_slam)
+[0.625s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[0.625s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[0.625s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[0.625s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[0.628s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[0.628s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[0.628s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[0.628s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[0.641s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.Spawn.ExecFailed: /usr/bin/dbus-launch terminated abnormally without any error message
+[0.641s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[0.641s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/local_setup.ps1'
+[0.642s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/_local_setup_util_ps1.py'
+[0.643s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/setup.ps1'
+[0.644s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/local_setup.sh'
+[0.645s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/_local_setup_util_sh.py'
+[0.645s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/setup.sh'
+[0.646s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/local_setup.bash'
+[0.646s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/setup.bash'
+[0.647s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/local_setup.zsh'
+[0.647s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/setup.zsh'

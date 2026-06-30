@@ -1,0 +1,62 @@
+[0.292s] Invoking command in '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/lk-s-2026-miloje-slam/src/my_robot_slam': PS1=📦[\u@ros2-env \W]$ PYTHONPATH=/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/lib/python3.10/site-packages: /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/my_robot_slam build --build-base /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build install --record /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/install.log --install-scripts $base/lib/my_robot_slam --single-version-externally-managed install_data
+[0.402s] running egg_info
+[0.402s] writing ../../../build/my_robot_slam/my_robot_slam.egg-info/PKG-INFO
+[0.402s] writing dependency_links to ../../../build/my_robot_slam/my_robot_slam.egg-info/dependency_links.txt
+[0.402s] writing entry points to ../../../build/my_robot_slam/my_robot_slam.egg-info/entry_points.txt
+[0.402s] writing requirements to ../../../build/my_robot_slam/my_robot_slam.egg-info/requires.txt
+[0.402s] writing top-level names to ../../../build/my_robot_slam/my_robot_slam.egg-info/top_level.txt
+[0.404s] reading manifest file '../../../build/my_robot_slam/my_robot_slam.egg-info/SOURCES.txt'
+[0.404s] writing manifest file '../../../build/my_robot_slam/my_robot_slam.egg-info/SOURCES.txt'
+[0.404s] running build
+[0.404s] running build_py
+[0.405s] running install
+[0.405s] running install_lib
+[0.405s] creating /usr/local/lib/python3.10/dist-packages/my_robot_slam
+[0.405s] copying /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build/lib/my_robot_slam/__init__.py -> /usr/local/lib/python3.10/dist-packages/my_robot_slam
+[0.406s] copying /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build/lib/my_robot_slam/battery_monitor.py -> /usr/local/lib/python3.10/dist-packages/my_robot_slam
+[0.406s] copying /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build/lib/my_robot_slam/desni_motor.py -> /usr/local/lib/python3.10/dist-packages/my_robot_slam
+[0.406s] copying /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build/lib/my_robot_slam/enkoder_sim.py -> /usr/local/lib/python3.10/dist-packages/my_robot_slam
+[0.406s] copying /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build/lib/my_robot_slam/komunikacija.py -> /usr/local/lib/python3.10/dist-packages/my_robot_slam
+[0.406s] copying /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build/lib/my_robot_slam/levi_motor.py -> /usr/local/lib/python3.10/dist-packages/my_robot_slam
+[0.406s] copying /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build/lib/my_robot_slam/mock_laser.py -> /usr/local/lib/python3.10/dist-packages/my_robot_slam
+[0.406s] copying /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build/lib/my_robot_slam/motion_planner.py -> /usr/local/lib/python3.10/dist-packages/my_robot_slam
+[0.406s] copying /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build/lib/my_robot_slam/odometrija.py -> /usr/local/lib/python3.10/dist-packages/my_robot_slam
+[0.406s] copying /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build/lib/my_robot_slam/path_planner.py -> /usr/local/lib/python3.10/dist-packages/my_robot_slam
+[0.407s] copying /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build/lib/my_robot_slam/slam_processor.py -> /usr/local/lib/python3.10/dist-packages/my_robot_slam
+[0.407s] copying /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build/lib/my_robot_slam/1LidarReading.py -> /usr/local/lib/python3.10/dist-packages/my_robot_slam
+[0.407s] byte-compiling /usr/local/lib/python3.10/dist-packages/my_robot_slam/__init__.py to __init__.cpython-310.pyc
+[0.407s] byte-compiling /usr/local/lib/python3.10/dist-packages/my_robot_slam/battery_monitor.py to battery_monitor.cpython-310.pyc
+[0.408s] byte-compiling /usr/local/lib/python3.10/dist-packages/my_robot_slam/desni_motor.py to desni_motor.cpython-310.pyc
+[0.408s] byte-compiling /usr/local/lib/python3.10/dist-packages/my_robot_slam/enkoder_sim.py to enkoder_sim.cpython-310.pyc
+[0.408s] byte-compiling /usr/local/lib/python3.10/dist-packages/my_robot_slam/komunikacija.py to komunikacija.cpython-310.pyc
+[0.409s] byte-compiling /usr/local/lib/python3.10/dist-packages/my_robot_slam/levi_motor.py to levi_motor.cpython-310.pyc
+[0.409s] byte-compiling /usr/local/lib/python3.10/dist-packages/my_robot_slam/mock_laser.py to mock_laser.cpython-310.pyc
+[0.410s] byte-compiling /usr/local/lib/python3.10/dist-packages/my_robot_slam/motion_planner.py to motion_planner.cpython-310.pyc
+[0.410s] byte-compiling /usr/local/lib/python3.10/dist-packages/my_robot_slam/odometrija.py to odometrija.cpython-310.pyc
+[0.411s] byte-compiling /usr/local/lib/python3.10/dist-packages/my_robot_slam/path_planner.py to path_planner.cpython-310.pyc
+[0.412s] byte-compiling /usr/local/lib/python3.10/dist-packages/my_robot_slam/slam_processor.py to slam_processor.cpython-310.pyc
+[0.412s] byte-compiling /usr/local/lib/python3.10/dist-packages/my_robot_slam/1LidarReading.py to 1LidarReading.cpython-310.pyc
+[0.413s] running install_data
+[0.413s] creating /usr/local/share/ament_index
+[0.414s] creating /usr/local/share/ament_index/resource_index
+[0.414s] creating /usr/local/share/ament_index/resource_index/packages
+[0.414s] copying resource/my_robot_slam -> /usr/local/share/ament_index/resource_index/packages
+[0.414s] creating /usr/local/share/my_robot_slam
+[0.414s] copying package.xml -> /usr/local/share/my_robot_slam
+[0.414s] creating /usr/local/share/my_robot_slam/launch
+[0.414s] creating /usr/local/share/my_robot_slam/config
+[0.414s] running install_egg_info
+[0.415s] Copying ../../../build/my_robot_slam/my_robot_slam.egg-info to /usr/local/lib/python3.10/dist-packages/my_robot_slam-0.0.0.egg-info
+[0.416s] running install_scripts
+[0.430s] Installing battery_monitor script to /usr/lib/my_robot_slam
+[0.431s] Installing desni_motor script to /usr/lib/my_robot_slam
+[0.431s] Installing enkoder_sim script to /usr/lib/my_robot_slam
+[0.431s] Installing komunikacija script to /usr/lib/my_robot_slam
+[0.431s] Installing levi_motor script to /usr/lib/my_robot_slam
+[0.431s] Installing mock_laser script to /usr/lib/my_robot_slam
+[0.431s] Installing motion_planner script to /usr/lib/my_robot_slam
+[0.431s] Installing odometrija script to /usr/lib/my_robot_slam
+[0.431s] Installing path_planner script to /usr/lib/my_robot_slam
+[0.431s] Installing slam_processor script to /usr/lib/my_robot_slam
+[0.432s] writing list of installed files to '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/install.log'
+[0.447s] Invoked command in '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/lk-s-2026-miloje-slam/src/my_robot_slam' returned '0': PS1=📦[\u@ros2-env \W]$ PYTHONPATH=/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/install/my_robot_slam/lib/python3.10/site-packages: /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/my_robot_slam build --build-base /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/build install --record /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/build/my_robot_slam/install.log --install-scripts $base/lib/my_robot_slam --single-version-externally-managed install_data
