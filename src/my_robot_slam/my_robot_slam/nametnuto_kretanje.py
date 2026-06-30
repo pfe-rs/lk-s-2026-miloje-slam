@@ -34,7 +34,7 @@ class NametnutoKretanjeNode(Node):
             return
 
         ciljno_x = msg.data[0]
-        ciljno_y = msg.data[1]
+        ciljno_y = msg.data[1]  
 
 
         maks_granica = 440 * 4
@@ -44,11 +44,28 @@ class NametnutoKretanjeNode(Node):
         step= self.izracunaj_naredbe(ciljno_x, ciljno_y)
 
         izlazna_poruka = Int32MultiArray()
-        izlazna_poruka.data = [step, brzinaL, step, brzinaD]
-        self.kretanje_pub.publish(izlazna_poruka)
+        if ciljno_x>self.trenutno_x:
+            stepL=-step
+            stepD=-step
+            izlazna_poruka.data = [stepL, brzinaL, stepD, brzinaD]
+            self.kretanje_pub.publish(izlazna_poruka)
+        elif ciljno_x<self.trenutno_x:
+            stepL=step
+            stepD=step
+            izlazna_poruka.data = [stepL, brzinaL, stepD, brzinaD]
+            self.kretanje_pub.publish(izlazna_poruka)
+            
+        if ciljno_y>self.trenutno_y:
+            stepL=-step
+            stepD=step
+            izlazna_poruka.data = [stepL, brzinaL, stepD, brzinaD]
+            self.kretanje_pub.publish(izlazna_poruka)
+        elif ciljno_y<self.trenutno_y:
+            stepL=step
+            stepD=-step
+            izlazna_poruka.data = [stepL, brzinaL, stepD, brzinaD]
+            self.kretanje_pub.publish(izlazna_poruka)
 
-        # Nakon što se proračun izvrši, ažuriramo trenutnu poziciju robota
-        # (Pretpostavljamo da će motori uspešno izvršiti ove korake)
         self.trenutno_x = ciljno_x
         self.trenutno_y = ciljno_y
 
