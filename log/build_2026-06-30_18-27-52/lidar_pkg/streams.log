@@ -1,0 +1,42 @@
+[0.009s] Invoking command in '/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg': CMAKE_PREFIX_PATH=/opt/ros/humble DEBUGINFOD_URLS=ima:enforcing https://debuginfod.fedoraproject.org/ ima:ignore PS1=📦[\u@ros2-env \W]$ /usr/bin/cmake /home/veljkogalovic/robot_ws/NewWorkspace/src/lidar_pkg -DCMAKE_INSTALL_PREFIX=/home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg
+[0.071s] -- The C compiler identification is GNU 11.4.0
+[0.166s] -- The CXX compiler identification is GNU 11.4.0
+[0.173s] -- Detecting C compiler ABI info
+[0.249s] -- Detecting C compiler ABI info - done
+[0.258s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.258s] -- Detecting C compile features
+[0.258s] -- Detecting C compile features - done
+[0.261s] -- Detecting CXX compiler ABI info
+[0.358s] -- Detecting CXX compiler ABI info - done
+[0.366s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.367s] -- Detecting CXX compile features
+[0.367s] -- Detecting CXX compile features - done
+[0.369s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.565s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.657s] -- Found ament_lint_auto: 0.12.15 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.788s] -- Added test 'lint_cmake' to check CMake code style
+[0.789s] -- Added test 'xmllint' to check XML markup files
+[0.790s] -- Configuring done
+[0.793s] -- Generating done
+[0.795s] -- Build files have been written to: /home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg
+[0.800s] Invoked command in '/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble DEBUGINFOD_URLS=ima:enforcing https://debuginfod.fedoraproject.org/ ima:ignore PS1=📦[\u@ros2-env \W]$ /usr/bin/cmake /home/veljkogalovic/robot_ws/NewWorkspace/src/lidar_pkg -DCMAKE_INSTALL_PREFIX=/home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg
+[0.802s] Invoking command in '/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg': CMAKE_PREFIX_PATH=/opt/ros/humble DEBUGINFOD_URLS=ima:enforcing https://debuginfod.fedoraproject.org/ ima:ignore PS1=📦[\u@ros2-env \W]$ /usr/bin/cmake --build /home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg -- -j8 -l8
+[0.852s] Invoked command in '/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble DEBUGINFOD_URLS=ima:enforcing https://debuginfod.fedoraproject.org/ ima:ignore PS1=📦[\u@ros2-env \W]$ /usr/bin/cmake --build /home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg -- -j8 -l8
+[0.870s] Invoking command in '/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg': CMAKE_PREFIX_PATH=/opt/ros/humble DEBUGINFOD_URLS=ima:enforcing https://debuginfod.fedoraproject.org/ ima:ignore PS1=📦[\u@ros2-env \W]$ /usr/bin/cmake --install /home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg
+[0.879s] -- Install configuration: ""
+[0.879s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/ament_index/resource_index/package_run_dependencies/lidar_pkg
+[0.879s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/ament_index/resource_index/parent_prefix_path/lidar_pkg
+[0.880s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/environment/ament_prefix_path.sh
+[0.880s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/environment/ament_prefix_path.dsv
+[0.880s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/environment/path.sh
+[0.881s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/environment/path.dsv
+[0.881s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/local_setup.bash
+[0.881s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/local_setup.sh
+[0.881s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/local_setup.zsh
+[0.881s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/local_setup.dsv
+[0.882s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/package.dsv
+[0.882s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/ament_index/resource_index/packages/lidar_pkg
+[0.882s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/cmake/lidar_pkgConfig.cmake
+[0.882s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/cmake/lidar_pkgConfig-version.cmake
+[0.882s] -- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/package.xml
+[0.885s] Invoked command in '/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble DEBUGINFOD_URLS=ima:enforcing https://debuginfod.fedoraproject.org/ ima:ignore PS1=📦[\u@ros2-env \W]$ /usr/bin/cmake --install /home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg
