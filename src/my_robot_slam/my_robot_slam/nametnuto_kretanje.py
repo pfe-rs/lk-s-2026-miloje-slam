@@ -35,7 +35,7 @@ class NametnutoKretanjeNode(Node):
     def posalji_komandu(self, stepL, stepD):
         """Pakuje i šalje poruku Arduinu"""
         poruka = Int32MultiArray()
-        poruka.data = [int(stepL), BRZINA_L, int(stepD), BRZINA_D]
+        poruka.data = [stepL, BRZINA_L, stepD, BRZINA_D]
         self.kretanje_pub.publish(poruka)
 
     def okreni_robota(self, ciljni_ugao):
