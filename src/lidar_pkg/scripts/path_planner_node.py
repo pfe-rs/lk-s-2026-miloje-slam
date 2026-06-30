@@ -20,7 +20,7 @@ class PathPlanner(Node):
 
         # --- Objavljuje put ---
         self.path_pub = self.create_publisher(
-            Path, 'global_path', 10
+            Path, '11', 10
         )
 
         # --- Pretplacen na poziciju robota (Odom ili Slam) ---
@@ -144,7 +144,7 @@ class PathPlanner(Node):
     def heuristic(self, a, b):
         return math.sqrt((a[0] - b[0])**2 + (a[1] - b[1])**2)
 
-    def get_neighbors(self, node, msg):
+    def get_neighbors(self, node, msg, goal=None):
         width = msg.info.width
         height = msg.info.height
         neighbors = []
@@ -168,22 +168,31 @@ class PathPlanner(Node):
 
                 # AKO JE PREBLIZU ZIDA, IZBEGNI
                 is_safe = True
-                safety_radius = 5 
-                
-                if 0 <= occupancy_value < 40: # Lowered tolerance for obstacles
+                safety_radius = 5
+
+                # Goal cell is allowed to skip the wall-clearance check: by
+                # definition it sits next to unknown (-1) space (it's a
+                # frontier cell), so enforcing clearance from -1 there would
+                # make the goal permanently unreachable.
+                is_goal_cell = (goal is not None and (nx, ny) == goal)
+
+                if 0 <= occupancy_value < 40 and not is_goal_cell: # Lowered tolerance for obstacles
                     # Quick check around the neighbor cell to ensure no walls are too close
                     for sx in range(-safety_radius, safety_radius + 1):
                         for sy in range(-safety_radius, safety_radius + 1):
                             check_x, check_y = nx + sx, ny + sy
                             if 0 <= check_x < width and 0 <= check_y < height:
                                 check_idx = check_y * width + check_x
-                                if msg.data[check_idx] > 70 or msg.data[check_idx] == -1:
+                                # Only treat actual obstacles (>70) as unsafe.
+                                # Unknown cells (-1) are expected near a
+                                # frontier goal and must not block expansion.
+                                if msg.data[check_idx] > 70:
                                     is_safe = False
                                     break
                         if not is_safe: break
-                        
-                    if is_safe:
-                        neighbors.append(((nx, ny), cost))
+
+                if is_safe:
+                    neighbors.append(((nx, ny), cost))
 
         return neighbors
 
@@ -205,7 +214,7 @@ class PathPlanner(Node):
                 path.append(start)
                 return path[::-1]
 
-            for neighbor, step_cost in self.get_neighbors(current, msg):
+            for neighbor, step_cost in self.get_neighbors(current, msg, goal):
                 tentative_g_score = g_score[current] + step_cost
 
                 if tentative_g_score < g_score.get(neighbor, float('inf')):
