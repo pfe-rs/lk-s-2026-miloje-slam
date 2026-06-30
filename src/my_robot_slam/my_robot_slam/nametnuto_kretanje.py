@@ -46,11 +46,11 @@ class NametnutoKretanjeNode(Node):
             return  # Već gleda u dobrom pravcu
             
         if razlika == 90:    # Okret ulevo
-            self.posalji_komandu(-STEPOVI_ZA_90_STEPENI, STEPOVI_ZA_90_STEPENI)
+            self.posalji_komandu(STEPOVI_ZA_90_STEPENI, STEPOVI_ZA_90_STEPENI)
         elif razlika == 270:  # Okret udesno (360 - 270 = 90 udesno)
-            self.posalji_komandu(STEPOVI_ZA_90_STEPENI, -STEPOVI_ZA_90_STEPENI)
+            self.posalji_komandu(-STEPOVI_ZA_90_STEPENI, -STEPOVI_ZA_90_STEPENI)
         elif razlika == 180:  # Okret za 180 stepeni
-            self.posalji_komandu(STEPOVI_ZA_90_STEPENI * 2, -STEPOVI_ZA_90_STEPENI * 2)
+            self.posalji_komandu(STEPOVI_ZA_90_STEPENI * 2, STEPOVI_ZA_90_STEPENI * 2)
             
         self.trenutna_orijentacija = ciljni_ugao
         self.get_logger().info(f"Robot promenio pravac na: {ciljni_ugao}°")
