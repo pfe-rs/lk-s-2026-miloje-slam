@@ -10,29 +10,39 @@ class KomunikacijaArduinoNode(Node):
         super().__init__("komunikacija_arduino")
         self.get_logger().info("Čvor za komunikaciju sa Arduinom je pokrenut.")
 
-        self.arduino = serial.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=.1)         # Sluša oba motora
+        # Otvaranje serijske veze (timeout je stavljen na vrlo kratko da ne blokira tajmer)
+        self.arduino = serial.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=0.01)         
+        
+        # Subscriber za komande motora
         self.motor_sub = self.create_subscription(
             Int32MultiArray,
-            'podaci_motora',
+            '/podaci_motion_planner',
             self.callback,
             10)
+        
+        # Publisher za enkodere
+        self.pub_encoder = self.create_publisher(Int32MultiArray, '/podaci_enkodera', 10)
 
     def callback(self, msg):
-        pin = msg.data[0]
-        command = msg.data[1]
-        speed = msg.data[2]
-        steps = msg.data[3]
+        naredba=7
+        koraciL=msg.data[0]
+        brzinaL=msg.data[1]
+        koraciD=msg.data[2]
+        brzinaD=msg.data[3]
 
-        odgovor = self.write_read(pin, command, speed, steps)
-        self.get_logger().info(f"Arduino odgovorio: {odgovor}")
+        odgovor = self.write_read(naredba, koraciL, brzinaL, koraciD, brzinaD)
+        self.get_logger().info(f"Arduino odgovorio na komandu: {odgovor}")
 
-    def write_read(self, pin, command, speed, steps):
-        poruka = f"{pin} {command} {speed} {steps}\n"
+        izlazna_poruka = Int32MultiArray()
+        izlazna_poruka.data = [koraciL, koraciD]
+        self.pub_encoder.publish(izlazna_poruka)
+
+    def write_read(self, naredba, koraciL, brzinaL, koraciD, brzinaD):
+        poruka = f"{naredba} {koraciL} {brzinaL} {koraciD} {brzinaD}\n"
         self.arduino.write(poruka.encode('utf-8'))
-        time.sleep(0.01)
+        time.sleep(0.01) # Kratka pauza da Arduino obradi i odgovori
         odgovor = self.arduino.readline().decode('utf-8').strip()
         return odgovor
-
 
 def main(args=None):
     rclpy.init(args=args)
@@ -46,4 +56,4 @@ def main(args=None):
         rclpy.shutdown()
 
 if __name__ == '__main__':
-    main()
+    main()  
