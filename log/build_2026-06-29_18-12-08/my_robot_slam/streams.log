@@ -1,0 +1,30 @@
+[19.617s] Invoking command in '/home/pfe/SlamGit/lk-s-2026-miloje-slam/src/my_robot_slam': PYTHONPATH=/home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_robot_slam build --build-base /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build install --record /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/install.log --install-scripts $base/lib/my_robot_slam --single-version-externally-managed install_data
+[23.903s] running egg_info
+[24.182s] writing ../../build/my_robot_slam/my_robot_slam.egg-info/PKG-INFO
+[24.184s] writing dependency_links to ../../build/my_robot_slam/my_robot_slam.egg-info/dependency_links.txt
+[24.187s] writing entry points to ../../build/my_robot_slam/my_robot_slam.egg-info/entry_points.txt
+[24.189s] writing requirements to ../../build/my_robot_slam/my_robot_slam.egg-info/requires.txt
+[24.190s] writing top-level names to ../../build/my_robot_slam/my_robot_slam.egg-info/top_level.txt
+[24.872s] reading manifest file '../../build/my_robot_slam/my_robot_slam.egg-info/SOURCES.txt'
+[24.893s] writing manifest file '../../build/my_robot_slam/my_robot_slam.egg-info/SOURCES.txt'
+[24.895s] running build
+[24.897s] running build_py
+[24.915s] running install
+[25.048s] running install_lib
+[25.416s] running install_data
+[25.419s] running install_egg_info
+[25.775s] removing '/home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam-0.0.0-py3.12.egg-info' (and everything under it)
+[25.782s] Copying ../../build/my_robot_slam/my_robot_slam.egg-info to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam-0.0.0-py3.12.egg-info
+[25.807s] running install_scripts
+[27.787s] Installing battery_monitor script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[27.789s] Installing desni_motor script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[27.791s] Installing enkoder_sim script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[27.792s] Installing komunikacija script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[27.794s] Installing levi_motor script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[27.796s] Installing mock_laser script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[27.798s] Installing motion_planner script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[27.800s] Installing odometrija script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[27.801s] Installing path_planner script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[27.803s] Installing slam_processor script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[27.808s] writing list of installed files to '/home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/install.log'
+[28.249s] Invoked command in '/home/pfe/SlamGit/lk-s-2026-miloje-slam/src/my_robot_slam' returned '0': PYTHONPATH=/home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_robot_slam build --build-base /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build install --record /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/install.log --install-scripts $base/lib/my_robot_slam --single-version-externally-managed install_data

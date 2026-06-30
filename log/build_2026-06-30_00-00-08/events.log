@@ -1,0 +1,235 @@
+[0.000000] (-) TimerEvent: {}
+[0.001132] (my_robot_slam) JobQueued: {'identifier': 'my_robot_slam', 'dependencies': OrderedDict()}
+[0.003870] (my_robot_slam) JobStarted: {'identifier': 'my_robot_slam'}
+[0.098523] (-) TimerEvent: {}
+[0.199648] (-) TimerEvent: {}
+[0.301309] (-) TimerEvent: {}
+[0.402675] (-) TimerEvent: {}
+[0.504158] (-) TimerEvent: {}
+[0.605587] (-) TimerEvent: {}
+[0.707173] (-) TimerEvent: {}
+[0.810734] (-) TimerEvent: {}
+[0.911862] (-) TimerEvent: {}
+[1.012828] (-) TimerEvent: {}
+[1.113978] (-) TimerEvent: {}
+[1.215162] (-) TimerEvent: {}
+[1.316188] (-) TimerEvent: {}
+[1.417259] (-) TimerEvent: {}
+[1.518275] (-) TimerEvent: {}
+[1.619228] (-) TimerEvent: {}
+[1.720262] (-) TimerEvent: {}
+[1.821245] (-) TimerEvent: {}
+[1.922253] (-) TimerEvent: {}
+[2.023230] (-) TimerEvent: {}
+[2.124220] (-) TimerEvent: {}
+[2.225236] (-) TimerEvent: {}
+[2.326234] (-) TimerEvent: {}
+[2.427270] (-) TimerEvent: {}
+[2.528238] (-) TimerEvent: {}
+[2.629312] (-) TimerEvent: {}
+[2.730522] (-) TimerEvent: {}
+[2.831781] (-) TimerEvent: {}
+[2.932860] (-) TimerEvent: {}
+[3.033995] (-) TimerEvent: {}
+[3.135163] (-) TimerEvent: {}
+[3.236229] (-) TimerEvent: {}
+[3.337413] (-) TimerEvent: {}
+[3.438453] (-) TimerEvent: {}
+[3.539480] (-) TimerEvent: {}
+[3.640473] (-) TimerEvent: {}
+[3.741567] (-) TimerEvent: {}
+[3.842592] (-) TimerEvent: {}
+[3.943651] (-) TimerEvent: {}
+[4.044702] (-) TimerEvent: {}
+[4.145673] (-) TimerEvent: {}
+[4.246771] (-) TimerEvent: {}
+[4.347876] (-) TimerEvent: {}
+[4.448884] (-) TimerEvent: {}
+[4.549939] (-) TimerEvent: {}
+[4.650921] (-) TimerEvent: {}
+[4.751939] (-) TimerEvent: {}
+[4.853166] (-) TimerEvent: {}
+[4.954360] (-) TimerEvent: {}
+[5.055425] (-) TimerEvent: {}
+[5.156665] (-) TimerEvent: {}
+[5.257807] (-) TimerEvent: {}
+[5.359185] (-) TimerEvent: {}
+[5.460241] (-) TimerEvent: {}
+[5.561240] (-) TimerEvent: {}
+[5.662331] (-) TimerEvent: {}
+[5.763417] (-) TimerEvent: {}
+[5.864655] (-) TimerEvent: {}
+[5.965769] (-) TimerEvent: {}
+[6.066895] (-) TimerEvent: {}
+[6.168036] (-) TimerEvent: {}
+[6.269171] (-) TimerEvent: {}
+[6.370264] (-) TimerEvent: {}
+[6.471265] (-) TimerEvent: {}
+[6.572247] (-) TimerEvent: {}
+[6.673264] (-) TimerEvent: {}
+[6.774284] (-) TimerEvent: {}
+[6.875244] (-) TimerEvent: {}
+[6.976397] (-) TimerEvent: {}
+[7.077673] (-) TimerEvent: {}
+[7.179192] (-) TimerEvent: {}
+[7.280345] (-) TimerEvent: {}
+[7.381741] (-) TimerEvent: {}
+[7.483310] (-) TimerEvent: {}
+[7.584704] (-) TimerEvent: {}
+[7.686214] (-) TimerEvent: {}
+[7.787579] (-) TimerEvent: {}
+[7.889164] (-) TimerEvent: {}
+[7.990745] (-) TimerEvent: {}
+[8.092165] (-) TimerEvent: {}
+[8.193544] (-) TimerEvent: {}
+[8.294963] (-) TimerEvent: {}
+[8.396392] (-) TimerEvent: {}
+[8.498034] (-) TimerEvent: {}
+[9.427245] (-) TimerEvent: {}
+[9.528682] (-) TimerEvent: {}
+[9.630310] (-) TimerEvent: {}
+[9.731749] (-) TimerEvent: {}
+[9.833342] (-) TimerEvent: {}
+[9.934752] (-) TimerEvent: {}
+[10.036320] (-) TimerEvent: {}
+[10.137572] (-) TimerEvent: {}
+[10.238723] (-) TimerEvent: {}
+[10.339776] (-) TimerEvent: {}
+[10.440824] (-) TimerEvent: {}
+[10.541837] (-) TimerEvent: {}
+[10.642882] (-) TimerEvent: {}
+[10.743928] (-) TimerEvent: {}
+[10.844981] (-) TimerEvent: {}
+[10.946044] (-) TimerEvent: {}
+[11.047222] (-) TimerEvent: {}
+[11.148214] (-) TimerEvent: {}
+[11.249244] (-) TimerEvent: {}
+[11.350224] (-) TimerEvent: {}
+[11.451266] (-) TimerEvent: {}
+[11.552259] (-) TimerEvent: {}
+[11.653351] (-) TimerEvent: {}
+[11.754339] (-) TimerEvent: {}
+[11.855677] (-) TimerEvent: {}
+[11.956780] (-) TimerEvent: {}
+[12.057927] (-) TimerEvent: {}
+[12.159200] (-) TimerEvent: {}
+[12.260331] (-) TimerEvent: {}
+[12.361637] (-) TimerEvent: {}
+[12.397868] (my_robot_slam) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/my_robot_slam', 'build', '--build-base', '/home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build', 'install', '--record', '/home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/install.log', '--install-scripts', '$base/lib/my_robot_slam', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/pfe/SlamGit/lk-s-2026-miloje-slam/src/my_robot_slam', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'pfe', 'SSH_CLIENT': '10.42.0.1 39804 22', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/lib', 'HOME': '/home/pfe', 'OLDPWD': '/home/pfe', 'SSH_TTY': '/dev/pts/0', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'pfe', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '2', 'PATH': '/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam', 'LC_ALL': 'en_US.UTF-8', 'SSH_CONNECTION': '10.42.0.1 39804 10.42.0.2 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1'}, 'shell': False}
+[12.461870] (-) TimerEvent: {}
+[12.562905] (-) TimerEvent: {}
+[12.664001] (-) TimerEvent: {}
+[12.765183] (-) TimerEvent: {}
+[12.866248] (-) TimerEvent: {}
+[12.967303] (-) TimerEvent: {}
+[13.068262] (-) TimerEvent: {}
+[13.169280] (-) TimerEvent: {}
+[13.270365] (-) TimerEvent: {}
+[13.371455] (-) TimerEvent: {}
+[13.472530] (-) TimerEvent: {}
+[13.573610] (-) TimerEvent: {}
+[13.674799] (-) TimerEvent: {}
+[13.775903] (-) TimerEvent: {}
+[13.876909] (-) TimerEvent: {}
+[13.977952] (-) TimerEvent: {}
+[14.079033] (-) TimerEvent: {}
+[14.180019] (-) TimerEvent: {}
+[14.281125] (-) TimerEvent: {}
+[14.382158] (-) TimerEvent: {}
+[14.483199] (-) TimerEvent: {}
+[14.584219] (-) TimerEvent: {}
+[14.685210] (-) TimerEvent: {}
+[14.786285] (-) TimerEvent: {}
+[14.867851] (my_robot_slam) StdoutLine: {'line': b'running egg_info\n'}
+[14.886508] (-) TimerEvent: {}
+[14.987527] (-) TimerEvent: {}
+[15.041546] (my_robot_slam) StdoutLine: {'line': b'writing ../../build/my_robot_slam/my_robot_slam.egg-info/PKG-INFO\n'}
+[15.087815] (-) TimerEvent: {}
+[15.189347] (-) TimerEvent: {}
+[15.290773] (-) TimerEvent: {}
+[15.392326] (-) TimerEvent: {}
+[15.493735] (-) TimerEvent: {}
+[15.595382] (-) TimerEvent: {}
+[15.696851] (-) TimerEvent: {}
+[15.798312] (-) TimerEvent: {}
+[15.899838] (-) TimerEvent: {}
+[16.001350] (-) TimerEvent: {}
+[16.102896] (-) TimerEvent: {}
+[16.204344] (-) TimerEvent: {}
+[16.305864] (-) TimerEvent: {}
+[16.407320] (-) TimerEvent: {}
+[16.508781] (-) TimerEvent: {}
+[16.610314] (-) TimerEvent: {}
+[16.711755] (-) TimerEvent: {}
+[16.813339] (-) TimerEvent: {}
+[16.914750] (-) TimerEvent: {}
+[17.016323] (-) TimerEvent: {}
+[17.117750] (-) TimerEvent: {}
+[17.219372] (-) TimerEvent: {}
+[17.315552] (my_robot_slam) StdoutLine: {'line': b'writing dependency_links to ../../build/my_robot_slam/my_robot_slam.egg-info/dependency_links.txt\n'}
+[17.319850] (my_robot_slam) StdoutLine: {'line': b'writing entry points to ../../build/my_robot_slam/my_robot_slam.egg-info/entry_points.txt\n'}
+[17.321627] (-) TimerEvent: {}
+[17.322827] (my_robot_slam) StdoutLine: {'line': b'writing requirements to ../../build/my_robot_slam/my_robot_slam.egg-info/requires.txt\n'}
+[17.324966] (my_robot_slam) StdoutLine: {'line': b'writing top-level names to ../../build/my_robot_slam/my_robot_slam.egg-info/top_level.txt\n'}
+[17.421967] (-) TimerEvent: {}
+[17.523624] (-) TimerEvent: {}
+[17.625321] (-) TimerEvent: {}
+[17.726773] (-) TimerEvent: {}
+[17.828331] (-) TimerEvent: {}
+[17.929719] (-) TimerEvent: {}
+[18.031302] (-) TimerEvent: {}
+[18.132684] (-) TimerEvent: {}
+[18.234580] (-) TimerEvent: {}
+[18.336155] (-) TimerEvent: {}
+[18.437549] (-) TimerEvent: {}
+[18.538645] (-) TimerEvent: {}
+[18.639663] (-) TimerEvent: {}
+[18.706289] (my_robot_slam) StdoutLine: {'line': b"reading manifest file '../../build/my_robot_slam/my_robot_slam.egg-info/SOURCES.txt'\n"}
+[19.277136] (-) TimerEvent: {}
+[19.289464] (my_robot_slam) StdoutLine: {'line': b"writing manifest file '../../build/my_robot_slam/my_robot_slam.egg-info/SOURCES.txt'\n"}
+[19.290908] (my_robot_slam) StdoutLine: {'line': b'running build\n'}
+[19.292186] (my_robot_slam) StdoutLine: {'line': b'running build_py\n'}
+[19.304413] (my_robot_slam) StdoutLine: {'line': b'running install\n'}
+[19.370369] (my_robot_slam) StdoutLine: {'line': b'running install_lib\n'}
+[19.377292] (-) TimerEvent: {}
+[19.478272] (-) TimerEvent: {}
+[19.561568] (my_robot_slam) StdoutLine: {'line': b'running install_data\n'}
+[19.566019] (my_robot_slam) StdoutLine: {'line': b'running install_egg_info\n'}
+[19.578512] (-) TimerEvent: {}
+[19.679521] (-) TimerEvent: {}
+[19.750555] (my_robot_slam) StdoutLine: {'line': b"removing '/home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam-0.0.0-py3.12.egg-info' (and everything under it)\n"}
+[19.754385] (my_robot_slam) StdoutLine: {'line': b'Copying ../../build/my_robot_slam/my_robot_slam.egg-info to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam-0.0.0-py3.12.egg-info\n'}
+[19.768787] (my_robot_slam) StdoutLine: {'line': b'running install_scripts\n'}
+[19.779765] (-) TimerEvent: {}
+[19.880811] (-) TimerEvent: {}
+[19.981922] (-) TimerEvent: {}
+[20.082977] (-) TimerEvent: {}
+[20.184015] (-) TimerEvent: {}
+[20.285124] (-) TimerEvent: {}
+[20.386147] (-) TimerEvent: {}
+[20.487132] (-) TimerEvent: {}
+[20.588157] (-) TimerEvent: {}
+[20.689221] (-) TimerEvent: {}
+[20.790243] (-) TimerEvent: {}
+[20.891241] (-) TimerEvent: {}
+[20.992251] (-) TimerEvent: {}
+[20.999389] (my_robot_slam) StdoutLine: {'line': b'Installing battery_monitor script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam\n'}
+[21.002755] (my_robot_slam) StdoutLine: {'line': b'Installing desni_motor script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam\n'}
+[21.004661] (my_robot_slam) StdoutLine: {'line': b'Installing enkoder_sim script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam\n'}
+[21.006512] (my_robot_slam) StdoutLine: {'line': b'Installing komunikacija script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam\n'}
+[21.008354] (my_robot_slam) StdoutLine: {'line': b'Installing levi_motor script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam\n'}
+[21.010308] (my_robot_slam) StdoutLine: {'line': b'Installing mock_laser script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam\n'}
+[21.012357] (my_robot_slam) StdoutLine: {'line': b'Installing motion_planner script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam\n'}
+[21.014419] (my_robot_slam) StdoutLine: {'line': b'Installing odometrija script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam\n'}
+[21.016572] (my_robot_slam) StdoutLine: {'line': b'Installing path_planner script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam\n'}
+[21.018765] (my_robot_slam) StdoutLine: {'line': b'Installing slam_processor script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam\n'}
+[21.023593] (my_robot_slam) StdoutLine: {'line': b"writing list of installed files to '/home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/install.log'\n"}
+[21.092539] (-) TimerEvent: {}
+[21.193773] (-) TimerEvent: {}
+[21.295017] (-) TimerEvent: {}
+[21.317471] (my_robot_slam) CommandEnded: {'returncode': 0}
+[21.395475] (-) TimerEvent: {}
+[21.496845] (-) TimerEvent: {}
+[21.600186] (-) TimerEvent: {}
+[21.634142] (my_robot_slam) JobEnded: {'identifier': 'my_robot_slam', 'rc': 0}
+[21.639887] (-) EventReactorShutdown: {}

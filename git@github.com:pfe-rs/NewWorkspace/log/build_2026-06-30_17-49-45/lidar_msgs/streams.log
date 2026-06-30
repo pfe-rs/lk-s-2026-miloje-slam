@@ -1,4 +1,0 @@
-[0.008s] Invoking command in '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/NewWorkspace/build/lidar_msgs': PS1=📦[\u@ros2-env \W]$ /usr/bin/cmake /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/NewWorkspace/src/lidar_msgs -DCMAKE_INSTALL_PREFIX=/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/NewWorkspace/install/lidar_msgs
-[0.013s] [0mCMake Error: The source directory "/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/NewWorkspace/src/lidar_msgs" does not appear to contain CMakeLists.txt.
-[0.013s] Specify --help for usage, or press the help button on the CMake GUI.[0m
-[0.015s] Invoked command in '/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/NewWorkspace/build/lidar_msgs' returned '1': PS1=📦[\u@ros2-env \W]$ /usr/bin/cmake /home/veljkogalovic/robot_ws/git@github.com:pfe-rs/NewWorkspace/src/lidar_msgs -DCMAKE_INSTALL_PREFIX=/home/veljkogalovic/robot_ws/git@github.com:pfe-rs/NewWorkspace/install/lidar_msgs

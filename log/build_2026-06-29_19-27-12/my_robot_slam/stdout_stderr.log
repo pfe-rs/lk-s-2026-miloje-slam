@@ -1,0 +1,76 @@
+running egg_info
+creating ../../build/my_robot_slam/my_robot_slam.egg-info
+writing ../../build/my_robot_slam/my_robot_slam.egg-info/PKG-INFO
+writing dependency_links to ../../build/my_robot_slam/my_robot_slam.egg-info/dependency_links.txt
+writing entry points to ../../build/my_robot_slam/my_robot_slam.egg-info/entry_points.txt
+writing requirements to ../../build/my_robot_slam/my_robot_slam.egg-info/requires.txt
+writing top-level names to ../../build/my_robot_slam/my_robot_slam.egg-info/top_level.txt
+writing manifest file '../../build/my_robot_slam/my_robot_slam.egg-info/SOURCES.txt'
+reading manifest file '../../build/my_robot_slam/my_robot_slam.egg-info/SOURCES.txt'
+writing manifest file '../../build/my_robot_slam/my_robot_slam.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build
+creating /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib
+creating /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam
+copying my_robot_slam/MOTION_PATH_TESTER.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam
+copying my_robot_slam/slam_processor.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam
+copying my_robot_slam/odometrija.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam
+copying my_robot_slam/__init__.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam
+copying my_robot_slam/motori.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam
+copying my_robot_slam/path_planner.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam
+copying my_robot_slam/enkoder_sim.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam
+copying my_robot_slam/desni_motor.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam
+copying my_robot_slam/komunikacija.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam
+copying my_robot_slam/motion_planner.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam
+copying my_robot_slam/mock_laser.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam
+copying my_robot_slam/battery_monitor.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam
+running install
+running install_lib
+creating /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam
+copying /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam/MOTION_PATH_TESTER.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam
+copying /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam/slam_processor.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam
+copying /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam/odometrija.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam
+copying /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam/__init__.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam
+copying /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam/motori.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam
+copying /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam/path_planner.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam
+copying /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam/enkoder_sim.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam
+copying /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam/desni_motor.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam
+copying /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam/komunikacija.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam
+copying /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam/motion_planner.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam
+copying /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam/mock_laser.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam
+copying /home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam/battery_monitor.py -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam
+byte-compiling /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/MOTION_PATH_TESTER.py to MOTION_PATH_TESTER.cpython-312.pyc
+byte-compiling /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/slam_processor.py to slam_processor.cpython-312.pyc
+byte-compiling /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/odometrija.py to odometrija.cpython-312.pyc
+byte-compiling /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__init__.py to __init__.cpython-312.pyc
+byte-compiling /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/motori.py to motori.cpython-312.pyc
+byte-compiling /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/path_planner.py to path_planner.cpython-312.pyc
+byte-compiling /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/enkoder_sim.py to enkoder_sim.cpython-312.pyc
+byte-compiling /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/desni_motor.py to desni_motor.cpython-312.pyc
+byte-compiling /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/komunikacija.py to komunikacija.cpython-312.pyc
+byte-compiling /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/motion_planner.py to motion_planner.cpython-312.pyc
+byte-compiling /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/mock_laser.py to mock_laser.cpython-312.pyc
+byte-compiling /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/battery_monitor.py to battery_monitor.cpython-312.pyc
+running install_data
+creating /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/share/ament_index
+creating /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/share/ament_index/resource_index
+creating /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/share/ament_index/resource_index/packages
+copying resource/my_robot_slam -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/share/ament_index/resource_index/packages
+copying package.xml -> /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/share/my_robot_slam
+creating /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/share/my_robot_slam/launch
+creating /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/share/my_robot_slam/config
+running install_egg_info
+Copying ../../build/my_robot_slam/my_robot_slam.egg-info to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam-0.0.0-py3.12.egg-info
+running install_scripts
+Installing battery_monitor script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+Installing desni_motor script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+Installing enkoder_sim script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+Installing komunikacija script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+Installing levi_motor script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+Installing mock_laser script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+Installing motion_planner script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+Installing odometrija script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+Installing path_planner script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+Installing slam_processor script to /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+writing list of installed files to '/home/pfe/SlamGit/lk-s-2026-miloje-slam/build/my_robot_slam/install.log'

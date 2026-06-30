@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+#ne koristi se vise
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Int32MultiArray
@@ -15,7 +16,7 @@ class DesniMotorNode(Node):
             self.komanda_callback,
             10)
 
-        self.podaci_motora_pub = self.create_publisher(Int32MultiArray, 'podaci_motora', 10)
+        self.podaci_motora_pub = self.create_publisher(Int32MultiArray, 'podaci_desnog_motora', 10)
 
     def komanda_callback(self, msg):
         if len(msg.data) >= 2:
