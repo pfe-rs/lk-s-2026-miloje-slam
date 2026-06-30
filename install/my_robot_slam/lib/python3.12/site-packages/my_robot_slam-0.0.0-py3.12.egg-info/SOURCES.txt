@@ -14,9 +14,9 @@ my_robot_slam/battery_monitor.py
 my_robot_slam/desni_motor.py
 my_robot_slam/enkoder_sim.py
 my_robot_slam/komunikacija.py
-my_robot_slam/levi_motor.py
 my_robot_slam/mock_laser.py
 my_robot_slam/motion_planner.py
+my_robot_slam/motori.py
 my_robot_slam/odometrija.py
 my_robot_slam/path_planner.py
 my_robot_slam/slam_processor.py
