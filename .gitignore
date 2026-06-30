@@ -1,3 +1,10 @@
+# ROS 2 generisani folderi
+build/
+install/
+log/
+
+# Opciono: Python keš i lokalna podešavanja
+__pycache__/
 .vscode/
 # ROS 2 generisani folderi
 build/
