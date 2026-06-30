@@ -4,6 +4,7 @@ from rclpy.node import Node
 from std_msgs.msg import Int32MultiArray
 import serial
 import time
+import math
 
 class KomunikacijaArduinoNode(Node):
     def __init__(self):
@@ -38,7 +39,7 @@ class KomunikacijaArduinoNode(Node):
         brzinaL = msg.data[1]
         koraciD = msg.data[2]
         brzinaD = msg.data[3]
-        vreme=koraciL/brzinaL
+        vreme=abs(koraciL/brzinaL)
 
         # POPRAVLJENO: Dodato self. ispred poziva funkcije
         self.write_to_arduino(naredba, koraciL, brzinaL, koraciD, brzinaD, vreme)

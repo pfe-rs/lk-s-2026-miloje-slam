@@ -6,6 +6,7 @@
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/path_planner.py
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/enkoder_sim.py
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/desni_motor.py
+/home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/nametnuto_kretanje.py
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/komunikacija.py
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/motion_planner.py
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/mock_laser.py
@@ -18,6 +19,7 @@
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/path_planner.cpython-312.pyc
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/enkoder_sim.cpython-312.pyc
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/desni_motor.cpython-312.pyc
+/home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/nametnuto_kretanje.cpython-312.pyc
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/komunikacija.cpython-312.pyc
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/motion_planner.cpython-312.pyc
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/__pycache__/mock_laser.cpython-312.pyc
@@ -40,6 +42,7 @@
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam/levi_motor
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam/mock_laser
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam/motion_planner
+/home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam/nametnuto_kretanje
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam/odometrija
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam/path_planner
 /home/pfe/SlamGit/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam/slam_processor
