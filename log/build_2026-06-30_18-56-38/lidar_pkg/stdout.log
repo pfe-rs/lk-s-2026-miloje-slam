@@ -1,0 +1,31 @@
+-- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found rclpy: 3.3.21 (/opt/ros/humble/share/rclpy/cmake)
+-- Found std_srvs: 4.9.1 (/opt/ros/humble/share/std_srvs/cmake)
+-- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found lidar_msgs: 0.0.1 (/home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_msgs/share/lidar_msgs/cmake)
+-- Found geometry_msgs: 4.9.1 (/opt/ros/humble/share/geometry_msgs/cmake)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg
+-- Install configuration: ""
+-- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/lib/lidar_pkg/lidar_scan_node.py
+-- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/lib/lidar_pkg/vector_deducer_node.py
+-- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/ament_index/resource_index/package_run_dependencies/lidar_pkg
+-- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/ament_index/resource_index/parent_prefix_path/lidar_pkg
+-- Up-to-date: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/environment/ament_prefix_path.sh
+-- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/environment/path.sh
+-- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/environment/path.dsv
+-- Up-to-date: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/local_setup.bash
+-- Up-to-date: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/local_setup.sh
+-- Up-to-date: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/local_setup.zsh
+-- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/local_setup.dsv
+-- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/package.dsv
+-- Up-to-date: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/ament_index/resource_index/packages/lidar_pkg
+-- Up-to-date: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/cmake/lidar_pkgConfig.cmake
+-- Up-to-date: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/cmake/lidar_pkgConfig-version.cmake
+-- Installing: /home/veljkogalovic/robot_ws/NewWorkspace/install/lidar_pkg/share/lidar_pkg/package.xml
