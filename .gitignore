@@ -7,6 +7,7 @@ lidar_test_data/
 SLAM-Testing/log
 lidar_dump.txt
 runner.py
+.vscode/
 
 # Opciono: Python keš i lokalna podešavanja
 __pycache__/
