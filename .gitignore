@@ -4,6 +4,7 @@ install/
 log/
 git@github.com:pfe-rs/
 lidar_test_data/
+SLAM-Testing/log
 
 # Opciono: Python keš i lokalna podešavanja
 __pycache__/
