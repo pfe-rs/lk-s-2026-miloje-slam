@@ -30,7 +30,7 @@ setup(
             'path_planner = my_robot_slam.path_planner:main',
             'motion_planner = my_robot_slam.motion_planner:main',
             'komunikacija = my_robot_slam.komunikacija:main',
-            #LidarRviz opcioni fajl
+	          'nametnuto_kretanje = my_robot_slam.nametnuto_kretanje:main'
         ],
     },
 )

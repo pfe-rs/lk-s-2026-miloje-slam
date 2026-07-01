@@ -14,4 +14,16 @@ build/
 # Opciono: Python keš i lokalna podešavanja
 __pycache__/
 .vscode/
-.DS_Store
+.DS_Store/
+git@github.com:pfe-rs/
+src/my_robot_slam/my_robot_slam/slam_processor.py/
+src/my_robot_slam/my_robot_slam/motori.py/
+src/my_robot_slam/my_robot_slam/__init__.py/
+src/my_robot_slam/my_robot_slam/MOTION_PATH_TESTER.py/
+src/my_robot_slam/my_robot_slam/enkoder_sim.py/
+src/my_robot_slam/my_robot_slam/mock_laser.py/
+src/my_robot_slam/my_robot_slam/desni_motor.py/
+src/my_robot_slam/my_robot_slam/odometrija.py/
+src/my_robot_slam/my_robot_slam/log/
+src/my_robot_slam/my_robot_slam/build/
+src/my_robot_slam/my_robot_slam/install/
