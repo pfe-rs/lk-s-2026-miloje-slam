@@ -20,7 +20,7 @@ MARGINA_SIGURNOSTI = 1.15  # +15% zbog ubrzanja/usporavanja
 
 class MotionController(Node):
     def __init__(self):
-        super().__init__('motion_planner')
+        super().__init__('motion_planner_node')
         self.get_logger().info("Miloje Motion Planner čvor je uspešno pokrenut.")
         
         # Publisher ka Arduinu (preko novog ROS2 interfejsa)

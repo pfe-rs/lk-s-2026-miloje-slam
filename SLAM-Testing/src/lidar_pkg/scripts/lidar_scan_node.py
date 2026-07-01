@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+k = my_robot#!/usr/bin/env python3
 """
 ROS 2 node wrapping an RPLidar A1.
 

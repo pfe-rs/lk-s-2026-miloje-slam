@@ -19,7 +19,7 @@ CLEARANCE_THRESHOLD = 40  # occupancy value at/above which we don't need extra b
 
 class PathPlanner(Node):
     def __init__(self):
-        super().__init__('path_planner')
+        super().__init__('path_planner_node')
 
         # --- Pretplacen na mapu ---
         self.map_sub = self.create_subscription(
