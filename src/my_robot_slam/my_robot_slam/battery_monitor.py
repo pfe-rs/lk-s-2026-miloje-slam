@@ -8,14 +8,14 @@ import os
 
 class Baterija(Node):
     def __init__(self, kriticni_napon):
-        super().__init__('Monitor baterije')
+        super().__init__('battery_monitor')
         self.kriticni_napon = kriticni_napon
         self.brojac_tikova = 0
         self.potrebno_tikova = 5
 
         self.subscription = self.create_subscription(
             Float32,
-            'napon_baterije', # IME PORUKE
+            'battery_monitor', # IME PORUKE
             self.citanje_napona,
             10
         )

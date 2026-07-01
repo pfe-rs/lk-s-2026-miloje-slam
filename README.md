@@ -1,9 +1,22 @@
-# Provereno rade:
+# Cilj:
+### Da se ceo SLAM nalazi u folderu /src/my_robot_slam/my_robot_slam
 
-Fajlovji za slam (src/my_robot_slam):
--battery_monitor.py
--mock_laser
+# Folderi:
 
-Ostali nisu jos adekvatno provereni
+### Rviz
+Rviz folder sluzi za vizuelizaciju skenova lidara u programu rviz koji je deo ROS-a.
 
-# Dodatei u robot_ws/src/my_robot_slam/setup.py odgovarajuce entry pointove/popraviti postojece
+### SLAM-Testing
+Objedinjeni fajlovi koji ce se koristiti u konacnom SLAM-u, prelazni folder tokom sredjivanja gita.
+
+### RPLidarA1Viz
+Folder koji sluzi za vizuelizaciju i simulaciju lidara, prelazni folder tokom sredjivanja gita.
+
+### build
+Neophodni automatski generisani ros folder.
+
+### src
+Neophodni automatski generisani ros folder.
+
+# TODO:
+# Kako pokrenuti SLAM i ROS

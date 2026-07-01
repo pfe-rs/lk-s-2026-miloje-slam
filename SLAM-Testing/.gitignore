@@ -1,0 +1,11 @@
+# ROS 2 generisani folderi
+build/
+install/
+log/
+git@github.com:pfe-rs/
+SLAM-Testing/log/
+
+# Opciono: Python keš i lokalna podešavanja
+__pycache__/
+.vscode/
+.DS_Store

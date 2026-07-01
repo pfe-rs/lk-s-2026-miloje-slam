@@ -20,7 +20,7 @@ class MotionController(Node):
             Path, '/path_planner', self.path_callback, 10
         )
 
-        self.pub_motion_planner = self.create_publisher(Int32MultiArray, '/podaci_motion_planner', 10)
+        self.pub_motion_planner = self.create_publisher(Int32MultiArray, '/motion_planner', 10)
 
  
         ### DODATI PREPTLATU NA /path_planner KOJI CITA MSG
