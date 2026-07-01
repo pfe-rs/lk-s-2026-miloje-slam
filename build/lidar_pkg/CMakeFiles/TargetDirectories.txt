@@ -1,9 +1,0 @@
-/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg/CMakeFiles/uninstall.dir
-/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg/CMakeFiles/lidar_pkg_uninstall.dir
-/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg/CMakeFiles/test.dir
-/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg/CMakeFiles/edit_cache.dir
-/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg/CMakeFiles/rebuild_cache.dir
-/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg/CMakeFiles/list_install_components.dir
-/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg/CMakeFiles/install.dir
-/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg/CMakeFiles/install/local.dir
-/home/veljkogalovic/robot_ws/NewWorkspace/build/lidar_pkg/CMakeFiles/install/strip.dir

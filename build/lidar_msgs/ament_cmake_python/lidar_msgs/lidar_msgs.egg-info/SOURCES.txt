@@ -1,8 +1,0 @@
-setup.py
-lidar_msgs/__init__.py
-lidar_msgs.egg-info/PKG-INFO
-lidar_msgs.egg-info/SOURCES.txt
-lidar_msgs.egg-info/dependency_links.txt
-lidar_msgs.egg-info/top_level.txt
-lidar_msgs/msg/__init__.py
-lidar_msgs/msg/_lidar_sweep.py

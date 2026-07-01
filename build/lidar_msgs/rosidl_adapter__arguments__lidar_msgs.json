@@ -1,6 +1,0 @@
-{
-  "package_name": "lidar_msgs",
-  "non_idl_tuples": [
-    "/home/veljkogalovic/robot_ws/NewWorkspace/src/lidar_msgs:msg/LidarSweep.msg"
-  ]
-}
