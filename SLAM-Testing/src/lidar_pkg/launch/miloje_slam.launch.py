@@ -5,39 +5,32 @@ from launch.actions import ExecuteProcess
 
 def generate_launch_description():
     return LaunchDescription([
-        # 1. Lidar Driver Node
+        # Inside miloje_slam.launch.py, update the executables to match your entry_points:
         Node(
             package='lidar_pkg',
-            executable='lidar_scan_node.py',
+            executable='lidar_scan_node',  # <-- REMOVE '.py'
             name='lidar_scan_node',
             parameters=[{'port_name': '/dev/ttyUSB0'}],
             output='screen'
         ),
-        
-        # 2. Arduino Motor Controller (Miloje)
         Node(
             package='lidar_pkg',
-            executable='motion_planner_node.py',
+            executable='motion_planner_node',  # <-- REMOVE '.py'
             name='motion_planner_node',
             output='screen'
         ),
-        
-        # 3. SLAM Mapping Node
         Node(
             package='lidar_pkg',
-            executable='slam_mapping_node.py',
+            executable='slam_mapping_node',  # <-- REMOVE '.py'
             name='slam_mapping_node',
             output='screen'
         ),
-        
-        # 4. Frontier Path Planner Node
         Node(
             package='lidar_pkg',
-            executable='path_planner_node.py',
+            executable='path_planner_node',  # <-- REMOVE '.py'
             name='path_planner_node',
             output='screen'
         ),
-        
         # 5. Kickstart Service Call (Triggers after a brief delay)
         ExecuteProcess(
             cmd=['ros2', 'service', 'call', '/lidar_scan_node/scan_request', 'std_srvs/srv/Trigger'],
