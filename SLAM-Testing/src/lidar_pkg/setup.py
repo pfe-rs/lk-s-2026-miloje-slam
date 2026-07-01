@@ -23,11 +23,11 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'lidar_scan_node = scripts.lidar_scan_node:main',
-            'path_planner_node = scripts.path_planner_node:main',
-            'motion_planner_node = scripts.motion_planner_node:main',
-            'slam_mapping_node = scripts.slam_mapping_node:main',
-            'vector_deducer_node = scripts.vector_deducer_node:main'
+            'lidar_scan_node = lidar_pkg.lidar_scan_node:main',
+            'path_planner_node = lidar_pkg.path_planner_node:main',
+            'motion_planner_node = lidar_pkg.motion_planner_node:main',
+            'slam_mapping_node = lidar_pkg.slam_mapping_node:main',
+            'vector_deducer_node = lidar_pkg.vector_deducer_node:main'
             #LidarRviz opcioni fajl
         ],
     },
