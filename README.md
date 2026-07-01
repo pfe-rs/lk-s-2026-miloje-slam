@@ -1,6 +1,8 @@
 # Cilj:
 ### Da se ceo SLAM nalazi u folderu /src/my_robot_slam/my_robot_slam
 
+## Slam testing se pokrece sa jednim fajlom i komandom ". ./rebuild.sh" nakon sto se taj fajl napravi executable-nim
+
 # Folderi:
 
 ### Rviz
