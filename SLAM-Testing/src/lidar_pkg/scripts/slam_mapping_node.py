@@ -72,108 +72,160 @@ class SlamMappingNode(Node):
 
     def __init__(self):
         super().__init__('slam_mapping_node')
-        
+
         # Configuration parameters
-        self.declare_parameter('grid_resolution_m', 0.01) # 1cm = 0.01 meters
+        # NOTE: 0.01m (1cm) cells make the grid huge for any real room and
+        # make every downstream consumer (esp. path_planner's A*) much
+        # slower than it needs to be. 0.05m (5cm) is a much more reasonable
+        # default for a small mobile robot; override via parameter if you
+        # need finer resolution.
+        self.declare_parameter('grid_resolution_m', 0.05)
         self._res_m = self.get_parameter('grid_resolution_m').value
         self._res_mm = self._res_m * 1000.0
 
-        # Memory buffers to stack scan maps over time
-        self._all_poses = [np.identity(3)]  # Start pose at (0,0,0)
-        self._all_local_scans = []
-        
+        # --- Persistent map state ---
+        # Instead of keeping every historical scan/pose and re-raycasting
+        # the ENTIRE history on every new scan (which made this node get
+        # slower and heavier the longer a session ran), we now keep only:
+        #   - the current persistent occupancy grid (grown on demand)
+        #   - the previous local scan (needed for frame-to-frame ICP)
+        #   - the current accumulated global pose
+        # and integrate only the NEWEST scan into the grid each time.
+        self._grid = None                     # np.int8 array, created on first scan
+        self._origin_mm = np.array([0.0, 0.0])  # world mm coords of grid[0,0]'s corner
+        self._current_pose = np.identity(3)
+        self._last_local_scan = None
+
         # Subscribers and Publishers
         self._scan_sub = self.create_subscription(LidarSweep, '/lidar_scan_node/scan', self._scan_callback, 10)
-        self._map_pub = self.create_publisher(OccupancyGrid, '~/map', 10)
-        
+
+        # FIX: was '~/map' (-> /slam_mapping_node/map), which path_planner_node
+        # never subscribes to. path_planner_node listens on plain 'map', so we
+        # publish there directly.
+        self._map_pub = self.create_publisher(OccupancyGrid, 'map', 10)
+
         self.get_logger().info("SLAM Mapping Node online. Processing map sweeps dynamically...")
 
     def _scan_callback(self, msg: LidarSweep):
         if len(msg.distances) == 0:
             return
 
-        # 1. Process current scan frame coordinates
-        current_local = polar_to_cartesian(msg.angles, msg.distances)
-        
-        # 2. Track matching poses dynamically using sequential scan steps
-        if len(self._all_local_scans) > 0:
-            T_rel = icp(current_local, self._all_local_scans[-1])
-            current_pose = self._all_poses[-1] @ T_rel
-            self._all_poses.append(current_pose)
-        
-        self._all_local_scans.append(current_local)
-        
-        # 3. Generate Global Map Matrices
-        self._update_and_publish_map(msg.header.frame_id)
+        try:
+            current_local = polar_to_cartesian(np.array(msg.angles), np.array(msg.distances))
 
-    def _update_and_publish_map(self, frame_id):
-        all_rays = []
-        all_global_pts = []
-        
-        # Gather global positions
-        for i, local_pts in enumerate(self._all_local_scans):
-            T = self._all_poses[i]
-            robot_pos = T[:2, 2]
-            
-            homo_pts = np.ones((local_pts.shape[0], 3))
-            homo_pts[:, :2] = local_pts
-            global_pts = (T @ homo_pts.T).T[:, :2]
-            all_global_pts.append(global_pts)
-            
-            for pt in global_pts:
-                all_rays.append((robot_pos[0], robot_pos[1], pt[0], pt[1]))
+            if self._last_local_scan is not None:
+                try:
+                    T_rel = icp(current_local, self._last_local_scan)
+                    self._current_pose = self._current_pose @ T_rel
+                except Exception as e:
+                    # FIX: original code had no error handling around icp() here
+                    # (vector_deducer_node did, this one didn't). A degenerate
+                    # scan (too few points, no geometric structure) could crash
+                    # the whole node. We now log and skip integrating this scan
+                    # into the map rather than taking the node down.
+                    self.get_logger().error(
+                        f"ICP failed on this scan, skipping map integration: {e}"
+                    )
+                    self._last_local_scan = current_local
+                    return
 
-        # Calculate space dimensions bounds
-        all_pts_flat = np.vstack(all_global_pts)
-        all_poses_flat = np.array([p[:2, 2] for p in self._all_poses])
-        all_coords = np.vstack([all_pts_flat, all_poses_flat])
-        
-        min_x, min_y = np.min(all_coords, axis=0) - 500  # 500mm padding
-        max_x, max_y = np.max(all_coords, axis=0) + 500
-        
-        width = int(np.ceil((max_x - min_x) / self._res_mm))
-        height = int(np.ceil((max_y - min_y) / self._res_mm))
-        
-        # Base Matrix: Start filled entirely with Unknown values (-1)
-        grid = np.full((height, width), -1, dtype=np.int8)
-        
-        def to_grid(x, y):
-            return int(np.floor((x - min_x) / self._res_mm)), int(np.floor((y - min_y) / self._res_mm))
+            self._last_local_scan = current_local
+            self._integrate_scan(current_local, self._current_pose, msg.header.frame_id)
 
-        # Raycasting Execution Pass
-        for rx, ry, ex, ey in all_rays:
-            gx0, gy0 = to_grid(rx, ry)
-            gx1, gy1 = to_grid(ex, ey)
-            
+        except Exception as e:
+            self.get_logger().error(f"Unexpected error while processing scan: {e}")
+
+    # ------------------------------------------------------------------
+    # Incremental map integration
+    # ------------------------------------------------------------------
+
+    def _integrate_scan(self, local_pts, pose, frame_id):
+        homo_pts = np.ones((local_pts.shape[0], 3))
+        homo_pts[:, :2] = local_pts
+        global_pts = (pose @ homo_pts.T).T[:, :2]
+        robot_pos = pose[:2, 2]
+
+        pad_mm = 500.0
+        pts_and_robot = np.vstack([global_pts, robot_pos.reshape(1, 2)])
+        min_needed = pts_and_robot.min(axis=0) - pad_mm
+        max_needed = pts_and_robot.max(axis=0) + pad_mm
+
+        self._ensure_grid_covers(min_needed, max_needed)
+
+        height, width = self._grid.shape
+
+        def to_grid(pt):
+            gx = int(np.floor((pt[0] - self._origin_mm[0]) / self._res_mm))
+            gy = int(np.floor((pt[1] - self._origin_mm[1]) / self._res_mm))
+            return gx, gy
+
+        gx0, gy0 = to_grid(robot_pos)
+
+        for pt in global_pts:
+            gx1, gy1 = to_grid(pt)
+
             if not (0 <= gx0 < width and 0 <= gy0 < height and 0 <= gx1 < width and 0 <= gy1 < height):
                 continue
-                
-            free_pixels = bresenham_line(gx0, gy0, gx1, gy1)
-            for fx, fy in free_pixels:
-                if grid[fy, fx] != 100: 
-                    grid[fy, fx] = 0   # Free Space
-                    
-            grid[gy1, gx1] = 100       # Obstacle Wall Block
 
-        # 4. Construct ROS 2 OccupancyGrid Message Output Packet
+            for fx, fy in bresenham_line(gx0, gy0, gx1, gy1):
+                if self._grid[fy, fx] != 100:
+                    self._grid[fy, fx] = 0  # Free space
+
+            self._grid[gy1, gx1] = 100  # Obstacle
+
+        self._publish_map(frame_id)
+
+    def _ensure_grid_covers(self, min_needed, max_needed):
+        """Grows the persistent grid (if necessary) to cover the requested
+        world-space bounding box, preserving existing data."""
+
+        if self._grid is None:
+            width = max(int(np.ceil((max_needed[0] - min_needed[0]) / self._res_mm)), 1)
+            height = max(int(np.ceil((max_needed[1] - min_needed[1]) / self._res_mm)), 1)
+            self._grid = np.full((height, width), -1, dtype=np.int8)
+            self._origin_mm = np.array(min_needed, dtype=np.float64)
+            return
+
+        height, width = self._grid.shape
+        cur_min = self._origin_mm
+        cur_max = self._origin_mm + np.array([width, height]) * self._res_mm
+
+        new_min = np.minimum(cur_min, min_needed)
+        new_max = np.maximum(cur_max, max_needed)
+
+        if np.allclose(new_min, cur_min) and np.allclose(new_max, cur_max):
+            return  # existing grid already covers what we need
+
+        new_width = max(int(np.ceil((new_max[0] - new_min[0]) / self._res_mm)), 1)
+        new_height = max(int(np.ceil((new_max[1] - new_min[1]) / self._res_mm)), 1)
+        new_grid = np.full((new_height, new_width), -1, dtype=np.int8)
+
+        offset_x = int(round((cur_min[0] - new_min[0]) / self._res_mm))
+        offset_y = int(round((cur_min[1] - new_min[1]) / self._res_mm))
+        new_grid[offset_y:offset_y + height, offset_x:offset_x + width] = self._grid
+
+        self._grid = new_grid
+        self._origin_mm = new_min
+
+    def _publish_map(self, frame_id):
+        height, width = self._grid.shape
+
         map_msg = OccupancyGrid()
         map_msg.header.stamp = self.get_clock().now().to_msg()
-        map_msg.header.frame_id = frame_id # matches map base coordinate standard
-        
+        map_msg.header.frame_id = frame_id
+
         map_msg.info.resolution = self._res_m
         map_msg.info.width = width
         map_msg.info.height = height
-        
-        # Map origin pose offsets (converted from mm back to standard meters)
+
         origin_pose = Pose()
-        origin_pose.position.x = float(min_x / 1000.0)
-        origin_pose.position.y = float(min_y / 1000.0)
+        origin_pose.position.x = float(self._origin_mm[0] / 1000.0)
+        origin_pose.position.y = float(self._origin_mm[1] / 1000.0)
         origin_pose.position.z = 0.0
         map_msg.info.origin = origin_pose
-        
-        # Flatten the grid matrix row-by-row to pack it into standard int8 array data structure
-        map_msg.data = grid.ravel().tolist()
-        
+
+        map_msg.data = self._grid.ravel().tolist()
+
         self._map_pub.publish(map_msg)
         self.get_logger().info(f"Published updated map grid layout: {width}x{height} pixels.")
 
