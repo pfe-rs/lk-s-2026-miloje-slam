@@ -1,3 +1,6 @@
+# Cilj:
+### Da se ceo SLAM nalazi u folderu /src/my_robot_slam/my_robot_slam
+
 # Folderi:
 
 ### Rviz
