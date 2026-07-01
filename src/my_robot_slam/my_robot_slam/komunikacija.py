@@ -6,7 +6,7 @@ import serial
 
 class KomunikacijaArduinoNode(Node):
     def __init__(self):
-        super().__init__("komunikacija_arduino")
+        super().__init__("komunikacija")
         self.get_logger().info("Čvor za komunikaciju sa Arduinom je pokrenut.")
 
         # Otvaranje serijske veze preko ttyS0 porta
@@ -19,12 +19,12 @@ class KomunikacijaArduinoNode(Node):
         # Subscriber za komande motora
         self.motor_sub = self.create_subscription(
             Int32MultiArray,
-            '/podaci_motion_planner',
+            '/motion_planner',
             self.callback,
             10)
         
         # Publisher za enkodere
-        self.pub_encoder = self.create_publisher(Int32MultiArray, '/podaci_enkodera', 10)
+        self.pub_encoder = self.create_publisher(Int32MultiArray, '/komunikacija', 10)
 
     def callback(self, msg):
         # Provera da li niz sadrži dovoljno elemenata da spreči IndexError

@@ -17,7 +17,7 @@ class PathPlanner(Node):
         
         # --- Objavljuje put ---
         self.path_pub = self.create_publisher(
-            Path, 'global_path', 10
+            Path, 'path_planner', 10
         )
 
         # Koordinate koje se menjaju usput, pocetak na globalnoj 0
