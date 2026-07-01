@@ -12,9 +12,6 @@ Objedinjeni fajlovi koji ce se koristiti u konacnom SLAM-u, prelazni folder toko
 ### RPLidarA1Viz
 Folder koji sluzi za vizuelizaciju i simulaciju lidara, prelazni folder tokom sredjivanja gita.
 
-### build
-Neophodni automatski generisani ros folder.
-
 ### src
 Neophodni automatski generisani ros folder.
 
