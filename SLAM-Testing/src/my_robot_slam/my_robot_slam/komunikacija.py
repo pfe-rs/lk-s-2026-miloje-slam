@@ -3,7 +3,7 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Int32MultiArray
 import serial
-
+import time
 class KomunikacijaArduinoNode(Node):
     def __init__(self):
         super().__init__("komunikacija_arduino")
@@ -19,7 +19,12 @@ class KomunikacijaArduinoNode(Node):
         # Subscriber za komande motora
         self.motor_sub = self.create_subscription(
             Int32MultiArray,
-            '/podaci_motion_planner',
+            '/podaci_kretanje',
+            self.callback,
+            10)
+        self.skretanje_sub = self.create_subscription(
+            Int32MultiArray,
+            '/podaci_skretanje',
             self.callback,
             10)
         
@@ -37,17 +42,18 @@ class KomunikacijaArduinoNode(Node):
         brzinaL = msg.data[1]
         koraciD = msg.data[2]
         brzinaD = msg.data[3]
+        vreme=abs(koraciL/brzinaL)
 
         # POPRAVLJENO: Dodato self. ispred poziva funkcije
-        self.write_to_arduino(naredba, koraciL, brzinaL, koraciD, brzinaD)
+        self.write_to_arduino(naredba, koraciL, brzinaL, koraciD, brzinaD, vreme)
 
         # Slanje povratne informacije na topik za enkodere
         izlazna_poruka = Int32MultiArray()
         izlazna_poruka.data = [koraciL, koraciD]
         self.pub_encoder.publish(izlazna_poruka)
 
-    def write_to_arduino(self, naredba, koraciL, brzinaL, koraciD, brzinaD):
-        poruka = f"{naredba} {koraciL} {brzinaL} {koraciD} {brzinaD}\n"
+    def write_to_arduino(self, naredba, koraciL, brzinaL, koraciD, brzinaD, vreme):
+        poruka = f"{naredba} {koraciL} {brzinaL} {koraciD} {brzinaD} \n"
         self.arduino.write(poruka.encode('utf-8'))
         
         # Ako Arduino ipak šalje potvrdu, pročitaj je i baci je da ne puni bafer, 
@@ -56,6 +62,7 @@ class KomunikacijaArduinoNode(Node):
             _ = self.arduino.readline() 
             # odgovor = _.decode('utf-8').strip()
             # self.get_logger().info(f"Arduino: {odgovor}")
+        time.sleep(vreme*1,15)  # Pauza dok se komanda izvršava
 
 def main(args=None):
     rclpy.init(args=args)

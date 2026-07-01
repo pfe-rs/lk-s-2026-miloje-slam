@@ -17,9 +17,6 @@ STEPOVI_ZA_90_STEPENI = 275
 BRZINA_L = 200
 BRZINA_D = 200
 
-# Pretpostavka: BRZINA_L/BRZINA_D su koraci u sekundi (steps/s).
-# Ako je u pitanju nesto drugo (npr. PWM vrednost), ovu konstantu
-# i funkciju izracunaj_vreme_cekanja treba prilagoditi.
 MARGINA_SIGURNOSTI = 1.15  # +15% zbog ubrzanja/usporavanja motora
 
 
@@ -35,12 +32,15 @@ class NametnutoKretanjeNode(Node):
         # 0 = gleda duž +X, 90 = gleda duž +Y, 180 = gleda duž -X, 270 = gleda duž -Y
         self.trenutna_orijentacija = 90
 
-        # Subscriber i Publisher
+        # Subscriber i Publisher-i
         self.kretanje_sub = self.create_subscription(
-            Int32MultiArray, '/podaci_kretanja', self.callback, 10
+            Int32MultiArray, '/podaci_koordinate', self.callback, 10
         )
         self.kretanje_pub = self.create_publisher(
-            Int32MultiArray, '/podaci_motion_planner', 10
+            Int32MultiArray, '/podaci_kretanje', 10
+        )
+        self.okretanje_pub = self.create_publisher(
+            Int32MultiArray, '/podaci_okretanje', 10
         )
 
     def izracunaj_vreme_cekanja(self, stepL, stepD):
@@ -51,22 +51,30 @@ class NametnutoKretanjeNode(Node):
             return 0.0
         return (koraci_najveci / brzina) * MARGINA_SIGURNOSTI
 
-    def posalji_komandu(self, stepL, stepD):
-        """Pakuje i šalje poruku Arduinu, zatim čeka da se pokret završi."""
+    def posalji_komandu(self, stepL, stepD, tip_kretanja="linijski"):
+        """Pakuje i šalje poruku na odgovarajući topik, zatim čeka da se pokret završi."""
         stepL_int = int(round(stepL))
         stepD_int = int(round(stepD))
 
         poruka = Int32MultiArray()
         poruka.data = [stepL_int, BRZINA_L, stepD_int, BRZINA_D]
-        self.kretanje_pub.publish(poruka)
+        
+        # POPRAVLJENO: Odabir topika na osnovu tipa kretanja
+        if tip_kretanja == "rotacija":
+            self.okretanje_pub.publish(poruka)
+            Log_prefiks = "[ROTACIJA]"
+        else:
+            self.kretanje_pub.publish(poruka)
+            Log_prefiks = "[LINIJSKI]"
 
         vreme_cekanja = self.izracunaj_vreme_cekanja(stepL_int, stepD_int)
         if vreme_cekanja > 0:
             self.get_logger().info(
-                f"Šaljem komandu (L={stepL_int}, D={stepD_int}), "
+                f"{log_prefiks} Šaljem komandu (L={stepL_int}, D={stepD_int}), "
                 f"čekam {vreme_cekanja:.2f}s da se izvrši."
             )
-            time.sleep(10)
+            # POPRAVLJENO: Zamenjeno fiksno time.sleep(10) sa izračunatim vremenom
+            time.sleep(vreme_cekanja)
 
     def okreni_robota(self, ciljni_ugao):
         """Okreće robota na željeni pravac prateći hardverske smerove."""
@@ -75,15 +83,13 @@ class NametnutoKretanjeNode(Node):
         if razlika == 0:
             return  # Već gleda u dobrom pravcu
 
-        if razlika == 90:    # Okret ulevo (kontra-kazaljka)
-            # Levi ide unazad (+), desni ide unapred (+)
-            self.posalji_komandu(STEPOVI_ZA_90_STEPENI, STEPOVI_ZA_90_STEPENI)
-        elif razlika == 270:  # Okret udesno (smer kazaljke)
-            # Levi ide unapred (-), desni ide unazad (-)
-            self.posalji_komandu(-STEPOVI_ZA_90_STEPENI, -STEPOVI_ZA_90_STEPENI)
+        # Dodat argument tip_kretanja="rotacija" pri svakom pozivu
+        if razlika == 90:    # Okret ulevo
+            self.posalji_komandu(STEPOVI_ZA_90_STEPENI, STEPOVI_ZA_90_STEPENI, tip_kretanja="rotacija")
+        elif razlika == 270:  # Okret udesno
+            self.posalji_komandu(-STEPOVI_ZA_90_STEPENI, -STEPOVI_ZA_90_STEPENI, tip_kretanja="rotacija")
         elif razlika == 180:  # Okret za 180 stepeni
-            # Dupli okret udesno
-            self.posalji_komandu(-STEPOVI_ZA_90_STEPENI * 2, -STEPOVI_ZA_90_STEPENI * 2)
+            self.posalji_komandu(-STEPOVI_ZA_90_STEPENI * 2, -STEPOVI_ZA_90_STEPENI * 2, tip_kretanja="rotacija")
 
         self.trenutna_orijentacija = ciljni_ugao
         self.get_logger().info(f"Robot promenio pravac na: {ciljni_ugao}°")
@@ -105,7 +111,7 @@ class NametnutoKretanjeNode(Node):
             self.okreni_robota(potreban_ugao)
 
             stepovi_pravo = abs(razlika_x) / MM_PER_STEP
-            # HARDVERSKO PRAVILO: Levi točak (-), Desni točak (+) za kretanje napred
+            # Podrazumevani tip kretanja je "linijski", pa nema potrebe da ga naglašavamo
             self.posalji_komandu(-stepovi_pravo, stepovi_pravo)
             self.trenutno_x = ciljno_x
 
@@ -115,7 +121,6 @@ class NametnutoKretanjeNode(Node):
             self.okreni_robota(potreban_ugao)
 
             stepovi_pravo = abs(razlika_y) / MM_PER_STEP
-            # HARDVERSKO PRAVILO: Levi točak (-), Desni točak (+) za kretanje napred
             self.posalji_komandu(-stepovi_pravo, stepovi_pravo)
             self.trenutno_y = ciljno_y
 
