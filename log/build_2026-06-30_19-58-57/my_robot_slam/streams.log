@@ -1,0 +1,34 @@
+[1.135s] Invoking command in '/home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/src/my_robot_slam': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/build/my_robot_slam/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_robot_slam build --build-base /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/build/my_robot_slam/build install --record /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/build/my_robot_slam/install.log --install-scripts $base/lib/my_robot_slam --single-version-externally-managed install_data
+[1.489s] running egg_info
+[1.512s] writing ../../build/my_robot_slam/my_robot_slam.egg-info/PKG-INFO
+[1.512s] writing dependency_links to ../../build/my_robot_slam/my_robot_slam.egg-info/dependency_links.txt
+[1.512s] writing entry points to ../../build/my_robot_slam/my_robot_slam.egg-info/entry_points.txt
+[1.512s] writing requirements to ../../build/my_robot_slam/my_robot_slam.egg-info/requires.txt
+[1.512s] writing top-level names to ../../build/my_robot_slam/my_robot_slam.egg-info/top_level.txt
+[1.561s] reading manifest file '../../build/my_robot_slam/my_robot_slam.egg-info/SOURCES.txt'
+[1.562s] writing manifest file '../../build/my_robot_slam/my_robot_slam.egg-info/SOURCES.txt'
+[1.562s] running build
+[1.563s] running build_py
+[1.563s] copying my_robot_slam/nametnuto_kretanje.py -> /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam
+[1.563s] running install
+[1.572s] running install_lib
+[1.598s] copying /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/build/my_robot_slam/build/lib/my_robot_slam/nametnuto_kretanje.py -> /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam
+[1.599s] byte-compiling /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam/nametnuto_kretanje.py to nametnuto_kretanje.cpython-312.pyc
+[1.601s] running install_data
+[1.601s] running install_egg_info
+[1.630s] removing '/home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam-0.0.0-py3.12.egg-info' (and everything under it)
+[1.630s] Copying ../../build/my_robot_slam/my_robot_slam.egg-info to /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages/my_robot_slam-0.0.0-py3.12.egg-info
+[1.631s] running install_scripts
+[1.803s] Installing battery_monitor script to /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[1.804s] Installing desni_motor script to /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[1.804s] Installing enkoder_sim script to /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[1.804s] Installing komunikacija script to /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[1.804s] Installing levi_motor script to /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[1.805s] Installing mock_laser script to /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[1.805s] Installing motion_planner script to /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[1.805s] Installing nametnuto_kretanje script to /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[1.805s] Installing odometrija script to /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[1.806s] Installing path_planner script to /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[1.806s] Installing slam_processor script to /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/my_robot_slam
+[1.806s] writing list of installed files to '/home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/build/my_robot_slam/install.log'
+[1.858s] Invoked command in '/home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/src/my_robot_slam' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/build/my_robot_slam/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/install/my_robot_slam/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_robot_slam build --build-base /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/build/my_robot_slam/build install --record /home/nemanja/pfe/letnji_2026/lk-s-2026-miloje-slam/build/my_robot_slam/install.log --install-scripts $base/lib/my_robot_slam --single-version-externally-managed install_data
