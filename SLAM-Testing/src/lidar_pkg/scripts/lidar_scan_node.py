@@ -57,8 +57,8 @@ class LidarScanNode(Node):
         self._scan_in_progress = threading.Lock()
 
         self.get_logger().info(
-            f"Lidar ready on {self._port_name}. "
-            f"Waiting for calls to 'scan_request' service."
+            f"Lidar spreman {self._port_name}. "
+            f"Ceka 'scan_request' servis"
         )
 
     # Setup
@@ -66,7 +66,7 @@ class LidarScanNode(Node):
     def _connect_lidar(self):
         self._lidar = RPLidar(self._port_name)
         self.get_logger().info(f'RPLidar Info: {self._lidar.get_info()}')
-        self.get_logger().info(f'Health status: {self._lidar.get_health()}')
+        self.get_logger().info(f'Zdravstveni status: {self._lidar.get_health()}')
         self.get_logger().info('Cekanje motora...')
         time.sleep(self._stabilize_sec)
 
