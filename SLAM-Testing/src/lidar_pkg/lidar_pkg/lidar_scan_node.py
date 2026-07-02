@@ -111,30 +111,38 @@ class LidarScanNode(Node):
         response.message = f'Sken zavrsen: {len(points)} tacaka objavljeno.'
         return response
 
-    # Logika prikupljanja skena
     def _collect_one_rotation(self):
-        """Uzima jedan sken od 360 stepeni, 
-        u formatu (ugao, udaljenost) [stepen, mm] sortiran po uglu"""
-        
+        """Collects exactly one full 360-degree rotation of
+        (angle_deg, distance_mm) points, sorted by angle."""
+
         raw_points = []
         start_collecting = False
 
-        self.get_logger().info('Ceka pocetak skena')
+        self.get_logger().info('Searching for the start-of-scan flag...')
 
         with self._lidar_lock:
+            # ---- ROBUSNO RESETOVANJE SERIJSKOG STRIMA ----
+            try:
+                self._lidar.stop()          # Prvo zaustavljamo strim podataka koji teče dok se robot kreće
+                time.sleep(0.05)            # Kratka pauza da kontroler prihvati komandu
+                self._lidar.clean_input()   # Čistimo sve zaostale bajtove iz bafera
+            except Exception as e:
+                self.get_logger().warn(f'Neuspešno čišćenje bafera pre skena: {e}')
+
+            # Ponovo pokrećemo iteraciju sa čistog početka
             for new_scan, _, angle, distance in self._lidar.iter_measures():
                 if new_scan:
                     if not start_collecting:
                         start_collecting = True
                         self.get_logger().info(
-                            'Sken zapoceo, skenira 360'
+                            'Start flag found! Collecting one full rotation...'
                         )
                         if distance > 0:
                             raw_points.append((angle, distance))
                         continue
                     else:
                         self.get_logger().info(
-                            'Sken gotov, zavrsava'
+                            'End flag reached. Rotation complete.'
                         )
                         break
 
