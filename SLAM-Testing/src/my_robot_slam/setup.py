@@ -36,6 +36,7 @@ setup(
             'komunikacija = my_robot_slam.komunikacija:main',
             'odometrija = my_robot_slam.odometrija:main',
             'enkoder_sim = my_robot_slam.enkoder_sim:main',
+            'kretanje_sim = my_robot_slam.kretanje_sim:main'
         ],
     },
 )
