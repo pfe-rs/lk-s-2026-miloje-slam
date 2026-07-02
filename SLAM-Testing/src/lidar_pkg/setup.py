@@ -28,7 +28,8 @@ setup(
             'motion_planner_node = lidar_pkg.motion_planner_node:main',
             'slam_mapping_node = lidar_pkg.slam_mapping_node:main',
             'vector_deducer_node = lidar_pkg.vector_deducer_node:main',
-            'komunikacija = lidar_pkg.komunikacija:main'
+            'komunikacija = lidar_pkg.komunikacija:main',
+            'logger_node = lidar_pkg.logger_node:main'
             #LidarRviz opcioni fajl
         ],
     },
