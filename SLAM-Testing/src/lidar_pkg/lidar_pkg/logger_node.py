@@ -7,7 +7,6 @@ from rclpy.node import Node
 
 # Import the necessary message types based on your existing nodes
 from nav_msgs.msg import OccupancyGrid, Odometry
-# Replace 'custom_interfaces' with the actual package name where LidarSweep is defined
 from lidar_msgs.msg import LidarSweep 
 
 
@@ -70,20 +69,21 @@ class RosDataLoggerNode(Node):
                 f.write(json.dumps(data_dict) + '\n')
 
     def _scan_callback(self, msg: LidarSweep):
-        # Extract fields from your custom LidarSweep message. 
-        # Adjust these keys to match your message's actual attribute names.
         log_data = {
             "timestamp": self._get_timestamp(),
             "header": {
-                "stamp": {"sec": msg.header.stamp.sec, "nanosec": msg.header.stamp.nanosec},
+                "stamp": {
+                    "sec": msg.header.stamp.sec, 
+                    "nanosec": msg.header.stamp.nanosec
+                },
                 "frame_id": msg.header.frame_id
             },
-            # Example fields (replace with your actual LidarSweep attributes):
-            # "ranges": list(msg.ranges), 
-            # "angles": list(msg.angles)
+            # Convert the float32 arrays into standard Python lists
+            "distances": list(msg.distances),
+            "angles": list(msg.angles)
         }
         self._write_log("lidar_scans.jsonl", log_data)
-
+        
     def _map_callback(self, msg: OccupancyGrid):
         log_data = {
             "timestamp": self._get_timestamp(),
