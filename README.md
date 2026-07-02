@@ -31,3 +31,5 @@ SLAM logika u folderu SLAM-Testing/src/lidar_pkg/scripts
 ## 4. cvor - motion_planner, racuna kako MILOJE treba da ode kuda treba i sta se salje na arduino, na kraju poziva lidar_scan_node
 
 ### vector_deducer vise nije neophodan, racun je optimizovan.
+### SLAM_mapping mozda bude invertovan, ispravka je sledeca linija koda, ako to bude slucaj:
+icp(self._last_local_scan, current_local)
