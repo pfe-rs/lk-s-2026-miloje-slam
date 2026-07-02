@@ -1,20 +1,11 @@
 #!/usr/bin/env python3
 """
-ROS 2 node wrapping an RPLidar A1.
+- Uzima jedan sken na pocetku
+- Ne radi nista dok neki drugi node ne pozove '~/scan_request' servis (std_srvs/Trigger)
+- Na trigeru uzima 360 stepeni sken i salje ga u sensor_msgs/LaserScan i salje na ~/scan
+- Stand by posle
 
-Behavior:
-    - Connects to the lidar once at startup and lets the motor spin up.
-    - Stays idle (not collecting) until another node calls the
-      '~/scan_request' service (std_srvs/Trigger).
-    - On trigger, collects exactly one full 360-degree rotation
-      (using the same new_scan boundary-flag logic as the original
-      script), converts it to a sensor_msgs/LaserScan, and publishes
-      it on '~/scan' for downstream consumers (e.g. a vector_deducer
-      node).
-    - Returns to idle afterward, waiting for the next trigger.
-
-The actual blocking lidar I/O runs in a background thread so the
-ROS executor is never blocked while waiting for hardware.
+Blokator lidar I/O se izvrsava u pozadinskom tredu pa ROS nije blokiran dok ceka hardver
 """
 
 import threading
@@ -36,8 +27,8 @@ class LidarScanNode(Node):
     def __init__(self):
         super().__init__('lidar_scan_node')
 
-        # ---- Parameters ----
-        self.declare_parameter('port_name', '/dev/ttyUSB1')
+        # ---- Parametri ----
+        self.declare_parameter('port_name', '/dev/ttyUSB0')
         self.declare_parameter('frame_id', 'laser_frame')
         self.declare_parameter('motor_stabilize_sec', 2.0)
 
@@ -45,18 +36,15 @@ class LidarScanNode(Node):
         self._frame_id = self.get_parameter('frame_id').value
         self._stabilize_sec = self.get_parameter('motor_stabilize_sec').value
 
-        # ---- Lidar connection (once, at startup) ----
+        # ---- Lidar veza ----
         self._lidar = None
-        self._lidar_lock = threading.Lock()  # guards access to self._lidar
+        self._lidar_lock = threading.Lock()  # cuvar pristupa
         self._connect_lidar()
 
-        # ---- Publisher for completed scans ----
+        # ---- Pablisher za sken ----
         self._scan_pub = self.create_publisher(LidarSweep, '~/scan', 10)
 
-        # ---- Service: other nodes call this to request one scan ----
-        # ReentrantCallbackGroup + MultiThreadedExecutor so the service
-        # call can be in-flight while we still process other callbacks
-        # if needed later (lidar work itself happens in its own thread).
+        # ---- Cekanje servisa ----
         self._scan_cb_group = ReentrantCallbackGroup()
         self._scan_service = self.create_service(
             Trigger,
@@ -65,8 +53,7 @@ class LidarScanNode(Node):
             callback_group=self._scan_cb_group,
         )
 
-        # Prevents two overlapping scan requests from both touching
-        # the lidar hardware at once.
+        # Ne dozvoljava dva preklapajuca skena
         self._scan_in_progress = threading.Lock()
 
         self.get_logger().info(
@@ -74,15 +61,13 @@ class LidarScanNode(Node):
             f"Waiting for calls to 'scan_request' service."
         )
 
-    # ------------------------------------------------------------------
-    # Setup / teardown
-    # ------------------------------------------------------------------
+    # Setup
 
     def _connect_lidar(self):
         self._lidar = RPLidar(self._port_name)
-        self.get_logger().info(f'RPLidar Information: {self._lidar.get_info()}')
+        self.get_logger().info(f'RPLidar Info: {self._lidar.get_info()}')
         self.get_logger().info(f'Health status: {self._lidar.get_health()}')
-        self.get_logger().info('Waiting for motor to stabilize...')
+        self.get_logger().info('Cekanje motora...')
         time.sleep(self._stabilize_sec)
 
     def destroy_node(self):
@@ -91,56 +76,51 @@ class LidarScanNode(Node):
                 self._lidar.stop()
                 self._lidar.stop_motor()
                 self._lidar.disconnect()
-                self.get_logger().info('Lidar disconnected safely.')
+                self.get_logger().info('Lidar uspesno otkacen.')
             except Exception as e:
-                self.get_logger().warn(f'Error while disconnecting lidar: {e}')
+                self.get_logger().warn(f'Greska pri otkacenju: {e}')
         super().destroy_node()
 
-    # ------------------------------------------------------------------
-    # Service callback
-    # ------------------------------------------------------------------
+    # Servis callback
 
     def _handle_scan_request(self, request, response):
-        """Called by the triggering node. Blocks until one full
-        rotation has been collected and published."""
+        """ Zove ga triger, blokira dok se jedna rotacija sakuplja i salje"""
 
         if not self._scan_in_progress.acquire(blocking=False):
             response.success = False
-            response.message = 'A scan is already in progress.'
+            response.message = 'Sken se izvrsava'
             return response
 
         try:
             points = self._collect_one_rotation()
         except Exception as e:
-            self.get_logger().error(f'Scan failed: {e}')
+            self.get_logger().error(f'Sken neuspesan: {e}')
             response.success = False
-            response.message = f'Scan failed: {e}'
+            response.message = f'Sken neuspesan: {e}'
             return response
         finally:
             self._scan_in_progress.release()
 
         if not points:
             response.success = False
-            response.message = 'No valid points captured during scan.'
+            response.message = 'Nisu pokupljene validne tacke'
             return response
 
         self._publish_scan(points)
         response.success = True
-        response.message = f'Scan complete: {len(points)} points published.'
+        response.message = f'Sken zavrsen: {len(points)} tacaka objavljeno.'
         return response
 
-    # ------------------------------------------------------------------
-    # Core scan logic (ported from the original script)
-    # ------------------------------------------------------------------
-
+    # Logika prikupljanja skena
+    
     def _collect_one_rotation(self):
-        """Collects exactly one full 360-degree rotation of
-        (angle_deg, distance_mm) points, sorted by angle."""
-
+        """Uzima jedan sken od 360 stepeni, 
+        u formatu (ugao, udaljenost) [stepen, mm] sortiran po uglu"""
+        
         raw_points = []
         start_collecting = False
 
-        self.get_logger().info('Searching for the start-of-scan flag...')
+        self.get_logger().info('Ceka pocetak skena')
 
         with self._lidar_lock:
             for new_scan, _, angle, distance in self._lidar.iter_measures():
@@ -148,14 +128,14 @@ class LidarScanNode(Node):
                     if not start_collecting:
                         start_collecting = True
                         self.get_logger().info(
-                            'Start flag found! Collecting one full rotation...'
+                            'Sken zapoceo, skenira 360'
                         )
                         if distance > 0:
                             raw_points.append((angle, distance))
                         continue
                     else:
                         self.get_logger().info(
-                            'End flag reached. Rotation complete.'
+                            'Sken gotov, zavrsava'
                         )
                         break
 
@@ -165,17 +145,11 @@ class LidarScanNode(Node):
         raw_points.sort(key=lambda p: p[0])
         return raw_points
 
-    # ------------------------------------------------------------------
-    # Publishing
-    # ------------------------------------------------------------------
+    # Pablish
 
     def _publish_scan(self, points):
-        """Publishes the raw (angle_deg, distance_mm) points as a
-        LidarSweep message. No unit conversion, resampling, or
-        binning -- angles[i] and distances[i] are a direct pairing,
-        sorted by angle, exactly as collected.
-        """
-
+        # Objavlju tacke kao LidarSweep poruke (custom format)
+        
         msg = LidarSweep()
         msg.header.stamp = self.get_clock().now().to_msg()
         msg.header.frame_id = self._frame_id
@@ -184,7 +158,7 @@ class LidarScanNode(Node):
         msg.distances = [float(distance) for _, distance in points]
 
         self._scan_pub.publish(msg)
-        self.get_logger().info(f'Published LidarSweep with {len(points)} points.')
+        self.get_logger().info(f'Objavljen LidarSweep sa {len(points)} tacaka.')
 
 
 def main(args=None):
