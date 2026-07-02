@@ -11,7 +11,6 @@ get_neighbors then explicitly exempts the goal cell from the safety check (by de
    (right now inflation is only built after the frontier is chosen).
 """
 # ODREDJUJE GDE TREBA ICI OD REZULTATA MAPE
-# ZAMENI A* SA BFS ZA JEDNOSTAVNOST IMPLEMENTACIJE
 from collections import deque
 
 from nav_msgs.msg import Odometry
@@ -38,7 +37,9 @@ class PathPlanner(Node):
         )
 
         # --- Objavljuje put ---
-        # motion planner treba na global_path
+        # FIX: was '11' (looks like a leftover placeholder). motion_planner_node
+        # subscribes to 'global_path', so nothing downstream ever received a
+        # path before this fix, regardless of whether A* succeeded.
         self.path_pub = self.create_publisher(
             Path, '/global_path', 10
         )
@@ -57,7 +58,7 @@ class PathPlanner(Node):
         # Precomputed per-map-update obstacle inflation (see map_callback)
         self._inflated_obstacles = None
 
-        self.get_logger().info("BFS pokrenut")
+        self.get_logger().info("A* pokrenut")
 
     def update_goal_to_nearest_frontier(self, msg):
         # TRAZI NAJBLIZI NEPOSECEN PROSTOR KOJI JE DOSTUPAN IZ SLOBODNOG PROSTORA
@@ -122,7 +123,7 @@ class PathPlanner(Node):
         goal_grid = self.world_to_grid(self.goal_x, self.goal_y, msg.info)
 
         if not (0 <= start_grid[0] < msg.info.width and 0 <= start_grid[1] < msg.info.height):
-            self.get_logger().error("Greska robot izvan mape!")
+            self.get_logger().error("Robot start position is outside the current map boundaries!")
             return
 
         # FIX: precompute obstacle inflation ONCE per map update instead of
@@ -134,7 +135,7 @@ class PathPlanner(Node):
         grid_path = self.a_star(start_grid, goal_grid, msg)
 
         if not grid_path:
-            self.get_logger().warn("Nema dobrog puta")
+            self.get_logger().warn("A* failed to find a valid path!")
             return
 
         path_msg = Path()
@@ -153,7 +154,21 @@ class PathPlanner(Node):
         self.path_pub.publish(path_msg)
 
     def _build_inflated_obstacles(self, msg):
-        # Padovanje zidova
+        """Builds a boolean grid where True means 'too close to (or on) a
+        wall to drive through'.
+
+        FIX: the original per-neighbor check only ran the wall-clearance
+        scan when a cell's OWN occupancy value was in [0, 40). A cell whose
+        occupancy was >= 40 -- including an actual wall marked 100 -- never
+        entered that branch and fell through to `is_safe = True`, meaning
+        A* could treat real obstacle cells as safe to path through. Using
+        a proper morphological dilation of the obstacle mask fixes this:
+        the dilated mask always includes the original obstacle cells
+        themselves (dilation only ever grows a mask, never shrinks it), so
+        both "on a wall" and "too close to a wall" are excluded correctly,
+        in one O(1)-per-cell lookup instead of an O(radius^2) scan per
+        neighbor.
+        """
         grid_np = np.array(msg.data, dtype=np.int16).reshape((msg.info.height, msg.info.width))
         obstacle_mask = grid_np >= OBSTACLE_THRESHOLD
 
@@ -164,7 +179,12 @@ class PathPlanner(Node):
         return ndimage.binary_dilation(obstacle_mask, structure=disk)
 
     def world_to_grid(self, wx, wy, geo):
-        # Float umesto int zaokruzivanja
+        # FIX: was `int(...)`, which truncates toward zero instead of
+        # flooring. For any coordinate that comes out negative relative to
+        # the map origin (e.g. a slightly stale /odom reading right after
+        # the map has grown and shifted its origin), truncation rounds the
+        # wrong way and lands one cell off. slam_mapping_node already uses
+        # floor for the same conversion -- this matches it.
         gx = int(math.floor((wx - geo.origin.position.x) / geo.resolution))
         gy = int(math.floor((wy - geo.origin.position.y) / geo.resolution))
         return (gx, gy)
