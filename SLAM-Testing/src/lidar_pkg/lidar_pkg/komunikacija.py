@@ -66,7 +66,7 @@ class KomunikacijaArduinoNode(Node):
 
     def write_to_arduino(self, naredba, koraciL, brzinaL, koraciD, brzinaD, vreme):
         # ---- KLJUČNA IZMENA 2: Dodat \r ispred \n za robusniji serijski prenos ----
-        poruka = f"{naredba} {koraciL} {brzinaL} {koraciD} {brzinaD}\r\n"
+        poruka = f"{naredba} {koraciL} {brzinaL} {koraciD} {brzinaD}\n"
         self.get_logger().info(f"Šaljem Arduinu: {poruka.strip()}")
         self.arduino.write(poruka.encode('utf-8'))
         
