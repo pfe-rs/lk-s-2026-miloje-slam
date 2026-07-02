@@ -5,7 +5,7 @@ from sklearn.neighbors import NearestNeighbors
 import rclpy
 from rclpy.node import Node
 from lidar_msgs.msg import LidarSweep
-from nav_msgs.msg import OccupancyGrid
+from nav_msgs.msg import OccupancyGrid, Odometry
 from geometry_msgs.msg import Pose
 
 # Matematika
@@ -87,6 +87,9 @@ class SlamMappingNode(Node):
         # Objavljuje na /map
         self._map_pub = self.create_publisher(OccupancyGrid, '/map', 10)
 
+        # Objavljuje na /odom -- path_planner_node ceka nav_msgs/Odometry ovde
+        self._odom_pub = self.create_publisher(Odometry, 'odom', 10)
+
         self.get_logger().info("Mapiranje ukljuceno, obradjuje skenove")
 
     def _scan_callback(self, msg: LidarSweep):
@@ -96,20 +99,28 @@ class SlamMappingNode(Node):
         try:
             current_local = polar_to_cartesian(np.array(msg.angles), np.array(msg.distances))
 
-            if self._last_local_scan is not None:
-                try:
-                    T_rel = icp(current_local, self._last_local_scan)
-                    self._current_pose = self._current_pose @ T_rel
-                except Exception as e:
-                    # Provera uspeha
-                    self.get_logger().error(
-                        f"ICP nije uspeo, preskace: {e}"
-                    )
-                    self._last_local_scan = current_local
-                    return
+            if self._last_local_scan is None:
+                # Prvi sken: nema kretanja da se izracuna, ali path_planner_node
+                # ocekuje validnu /odom poruku i pre nego sto stigne drugi sken
+                self._last_local_scan = current_local
+                self._integrate_scan(current_local, self._current_pose, msg.header.frame_id)
+                self._publish_odom(msg.header.stamp)
+                return
+
+            try:
+                T_rel = icp(current_local, self._last_local_scan)
+                self._current_pose = self._current_pose @ T_rel
+            except Exception as e:
+                # Provera uspeha
+                self.get_logger().error(
+                    f"ICP nije uspeo, preskace: {e}"
+                )
+                self._last_local_scan = current_local
+                return
 
             self._last_local_scan = current_local
             self._integrate_scan(current_local, self._current_pose, msg.header.frame_id)
+            self._publish_odom(msg.header.stamp)
 
         except Exception as e:
             self.get_logger().error(f"Neocekivana greska tokom skena: {e}")
@@ -203,6 +214,25 @@ class SlamMappingNode(Node):
 
         self._map_pub.publish(map_msg)
         self.get_logger().info(f"Objavljuje mapu: {width}x{height} piksela.")
+
+    def _publish_odom(self, stamp):
+        # self._current_pose je akumulirana globalna transformacija (mm, isti
+        # SE(2) format koji koristi _integrate_scan). Odometry poruka
+        # ocekuje metre, pa se ovde konvertuje.
+        odom = Odometry()
+        odom.header.stamp = stamp
+        odom.header.frame_id = 'odom'
+        odom.child_frame_id = 'base_link'
+
+        odom.pose.pose.position.x = float(self._current_pose[0, 2] / 1000.0)
+        odom.pose.pose.position.y = float(self._current_pose[1, 2] / 1000.0)
+        odom.pose.pose.position.z = 0.0
+
+        yaw = float(np.arctan2(self._current_pose[1, 0], self._current_pose[0, 0]))
+        odom.pose.pose.orientation.z = float(np.sin(yaw / 2.0))
+        odom.pose.pose.orientation.w = float(np.cos(yaw / 2.0))
+
+        self._odom_pub.publish(odom)
 
 
 def main(args=None):

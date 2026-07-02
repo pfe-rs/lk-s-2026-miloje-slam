@@ -27,6 +27,7 @@ SLAM logika u folderu SLAM-Testing/src/lidar_pkg/scripts
 
 ## 1. cvor - lidar_scan_node uzima sken sa lidara i objavljuje ga u LidarSweep formatu
 ## 2. cvor - slam_mapping_node uzima LidarSweep i objavljuje mapu na /map
-## 3. cvor - vector_deducer, uzima sken i odredjuje promenu polozaja, objavljuje na /odom
-## 4. cvor - path_planner, racuna gde MILOJE treba da ode, objavljuje na ...
-## 5. cvor - motion_planner, racuna kako MILOJE treba da ode kuda treba i sta se salje na arduino, na kraju poziva lidar_scan_node
+## 3. cvor - path_planner, racuna gde MILOJE treba da ode, cita odometry
+## 4. cvor - motion_planner, racuna kako MILOJE treba da ode kuda treba i sta se salje na arduino, na kraju poziva lidar_scan_node
+
+### vector_deducer vise nije neophodan, racun je optimizovan.
