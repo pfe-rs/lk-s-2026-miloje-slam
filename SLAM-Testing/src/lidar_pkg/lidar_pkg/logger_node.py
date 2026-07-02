@@ -14,7 +14,7 @@ from custom_interfaces.msg import LidarSweep
 class RosDataLoggerNode(Node):
 
     def __init__(self):
-        super().__init__('ros_data_logger_node')
+        super().__init__('logger_node')
 
         # ---- Parametri ----
         self.declare_parameter('log_dir', '~/ros2_logs')
