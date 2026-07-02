@@ -8,7 +8,7 @@ from rclpy.node import Node
 # Import the necessary message types based on your existing nodes
 from nav_msgs.msg import OccupancyGrid, Odometry
 # Replace 'custom_interfaces' with the actual package name where LidarSweep is defined
-from custom_interfaces.msg import LidarSweep 
+from lidar_msgs.msg import LidarSweep 
 
 
 class RosDataLoggerNode(Node):
