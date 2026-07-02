@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
+"""
+
+Frontier goals aren't safety-checked against the inflation mask. 
+update_goal_to_nearest_frontier picks the first free cell it finds adjacent to unknown space via BFS, 
+with no regard for whether that cell is inside your SAFETY_RADIUS_CELLS buffer around a nearby wall. 
+get_neighbors then explicitly exempts the goal cell from the safety check (by design 
+— otherwise frontier goals near walls would be unreachable). Net effect: your robot could occasionally be sent to hug a wall.
+ If that matters for your hardware, one option is to have the frontier search itself skip candidate cells
+   that fall inside self._inflated_obstacles, computed once at the top of map_callback before the BFS runs 
+   (right now inflation is only built after the frontier is chosen).
+"""
 # ODREDJUJE GDE TREBA ICI OD REZULTATA MAPE
+# ZAMENI A* SA BFS ZA JEDNOSTAVNOST IMPLEMENTACIJE
 from collections import deque
 
 from nav_msgs.msg import Odometry
@@ -14,7 +26,6 @@ from scipy import ndimage
 
 SAFETY_RADIUS_CELLS = 5
 OBSTACLE_THRESHOLD = 70   # occupancy value at/above which a cell is a wall
-CLEARANCE_THRESHOLD = 40  # occupancy value at/above which we don't need extra buffer
 
 
 class PathPlanner(Node):
@@ -27,16 +38,14 @@ class PathPlanner(Node):
         )
 
         # --- Objavljuje put ---
-        # FIX: was '11' (looks like a leftover placeholder). motion_planner_node
-        # subscribes to 'global_path', so nothing downstream ever received a
-        # path before this fix, regardless of whether A* succeeded.
+        # motion planner treba na global_path
         self.path_pub = self.create_publisher(
-            Path, 'global_path', 10
+            Path, '/global_path', 10
         )
 
         # --- Pretplacen na poziciju robota (Odom ili Slam) ---
         self.pose_sub = self.create_subscription(
-            Odometry, 'odom', self.pose_callback, 10
+            Odometry, '/odom', self.pose_callback, 10
         )
 
         # Koordinate koje se menjaju usput, pocetak na globalnoj 0
@@ -48,7 +57,7 @@ class PathPlanner(Node):
         # Precomputed per-map-update obstacle inflation (see map_callback)
         self._inflated_obstacles = None
 
-        self.get_logger().info("A* pokrenut")
+        self.get_logger().info("BFS pokrenut")
 
     def update_goal_to_nearest_frontier(self, msg):
         # TRAZI NAJBLIZI NEPOSECEN PROSTOR KOJI JE DOSTUPAN IZ SLOBODNOG PROSTORA
@@ -113,7 +122,7 @@ class PathPlanner(Node):
         goal_grid = self.world_to_grid(self.goal_x, self.goal_y, msg.info)
 
         if not (0 <= start_grid[0] < msg.info.width and 0 <= start_grid[1] < msg.info.height):
-            self.get_logger().error("Robot start position is outside the current map boundaries!")
+            self.get_logger().error("Greska robot izvan mape!")
             return
 
         # FIX: precompute obstacle inflation ONCE per map update instead of
@@ -125,7 +134,7 @@ class PathPlanner(Node):
         grid_path = self.a_star(start_grid, goal_grid, msg)
 
         if not grid_path:
-            self.get_logger().warn("A* failed to find a valid path!")
+            self.get_logger().warn("Nema dobrog puta")
             return
 
         path_msg = Path()
@@ -144,21 +153,7 @@ class PathPlanner(Node):
         self.path_pub.publish(path_msg)
 
     def _build_inflated_obstacles(self, msg):
-        """Builds a boolean grid where True means 'too close to (or on) a
-        wall to drive through'.
-
-        FIX: the original per-neighbor check only ran the wall-clearance
-        scan when a cell's OWN occupancy value was in [0, 40). A cell whose
-        occupancy was >= 40 -- including an actual wall marked 100 -- never
-        entered that branch and fell through to `is_safe = True`, meaning
-        A* could treat real obstacle cells as safe to path through. Using
-        a proper morphological dilation of the obstacle mask fixes this:
-        the dilated mask always includes the original obstacle cells
-        themselves (dilation only ever grows a mask, never shrinks it), so
-        both "on a wall" and "too close to a wall" are excluded correctly,
-        in one O(1)-per-cell lookup instead of an O(radius^2) scan per
-        neighbor.
-        """
+        # Padovanje zidova
         grid_np = np.array(msg.data, dtype=np.int16).reshape((msg.info.height, msg.info.width))
         obstacle_mask = grid_np >= OBSTACLE_THRESHOLD
 
@@ -169,8 +164,9 @@ class PathPlanner(Node):
         return ndimage.binary_dilation(obstacle_mask, structure=disk)
 
     def world_to_grid(self, wx, wy, geo):
-        gx = int((wx - geo.origin.position.x) / geo.resolution)
-        gy = int((wy - geo.origin.position.y) / geo.resolution)
+        # Float umesto int zaokruzivanja
+        gx = int(math.floor((wx - geo.origin.position.x) / geo.resolution))
+        gy = int(math.floor((wy - geo.origin.position.y) / geo.resolution))
         return (gx, gy)
 
     def grid_to_world(self, gx, gy, geo):
@@ -202,6 +198,20 @@ class PathPlanner(Node):
                 is_goal_cell = (goal is not None and (nx, ny) == goal)
 
                 is_safe = is_goal_cell or not self._inflated_obstacles[ny, nx]
+
+                # FIX: diagonal steps were only checked against the diagonal
+                # target cell itself, not the two orthogonal cells the robot
+                # would have to squeeze between. That let A* cut through the
+                # corner of a wall as if there were a gap, when the two
+                # flanking cells are actually blocked. Require both
+                # orthogonal neighbors of a diagonal step to be clear too.
+                if is_safe and not is_goal_cell and dx != 0 and dy != 0:
+                    corner_blocked = (
+                        self._inflated_obstacles[node[1], nx]
+                        or self._inflated_obstacles[ny, node[0]]
+                    )
+                    if corner_blocked:
+                        is_safe = False
 
                 if is_safe:
                     neighbors.append(((nx, ny), cost))

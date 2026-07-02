@@ -88,7 +88,7 @@ class SlamMappingNode(Node):
         self._map_pub = self.create_publisher(OccupancyGrid, '/map', 10)
 
         # Objavljuje na /odom -- path_planner_node ceka nav_msgs/Odometry ovde
-        self._odom_pub = self.create_publisher(Odometry, 'odom', 10)
+        self._odom_pub = self.create_publisher(Odometry, '/odom', 10)
 
         self.get_logger().info("Mapiranje ukljuceno, obradjuje skenove")
 
