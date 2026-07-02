@@ -41,7 +41,8 @@ class LidarScanNode(Node):
         self._lidar_lock = threading.Lock()  # cuvar pristupa
         self._connect_lidar()
 
-        # ---- Pablisher za sken ----
+        # ---- Pablisher za sken u formatu LidarSweep ----
+        # Privatan topic kako bi se izbegli naming konflikti, subscribuje se na /ime_noda/scan da bi radilo
         self._scan_pub = self.create_publisher(LidarSweep, '~/scan', 10)
 
         # ---- Cekanje servisa ----
@@ -62,7 +63,6 @@ class LidarScanNode(Node):
         )
 
     # Setup
-
     def _connect_lidar(self):
         self._lidar = RPLidar(self._port_name)
         self.get_logger().info(f'RPLidar Info: {self._lidar.get_info()}')
@@ -70,6 +70,7 @@ class LidarScanNode(Node):
         self.get_logger().info('Cekanje motora...')
         time.sleep(self._stabilize_sec)
 
+    #Brisanje
     def destroy_node(self):
         if self._lidar is not None:
             try:
@@ -82,7 +83,6 @@ class LidarScanNode(Node):
         super().destroy_node()
 
     # Servis callback
-
     def _handle_scan_request(self, request, response):
         """ Zove ga triger, blokira dok se jedna rotacija sakuplja i salje"""
 
@@ -112,7 +112,6 @@ class LidarScanNode(Node):
         return response
 
     # Logika prikupljanja skena
-    
     def _collect_one_rotation(self):
         """Uzima jedan sken od 360 stepeni, 
         u formatu (ugao, udaljenost) [stepen, mm] sortiran po uglu"""
@@ -146,7 +145,6 @@ class LidarScanNode(Node):
         return raw_points
 
     # Pablish
-
     def _publish_scan(self, points):
         # Objavlju tacke kao LidarSweep poruke (custom format)
         

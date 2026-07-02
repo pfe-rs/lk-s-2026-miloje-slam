@@ -8,9 +8,8 @@ from lidar_msgs.msg import LidarSweep
 from nav_msgs.msg import OccupancyGrid
 from geometry_msgs.msg import Pose
 
-# ----------------------------------------------------------------------
-# Math Core Functions (Preserved from your original script)
-# ----------------------------------------------------------------------
+# Matematika
+
 def polar_to_cartesian(angles_deg, distances_mm):
     angles_rad = np.deg2rad(angles_deg)
     return np.column_stack([distances_mm * np.cos(angles_rad), distances_mm * np.sin(angles_rad)])
@@ -65,46 +64,30 @@ def bresenham_line(x0, y0, x1, y1):
             y0 += sy
     return points
 
-# ----------------------------------------------------------------------
-# ROS 2 Mapping Node Wrapper
-# ----------------------------------------------------------------------
+# Slam Mapiranje Node
 class SlamMappingNode(Node):
 
     def __init__(self):
         super().__init__('slam_mapping_node')
 
-        # Configuration parameters
-        # NOTE: 0.01m (1cm) cells make the grid huge for any real room and
-        # make every downstream consumer (esp. path_planner's A*) much
-        # slower than it needs to be. 0.05m (5cm) is a much more reasonable
-        # default for a small mobile robot; override via parameter if you
-        # need finer resolution.
+        # Rezolucija od 5cm (0.05m)
         self.declare_parameter('grid_resolution_m', 0.05)
         self._res_m = self.get_parameter('grid_resolution_m').value
         self._res_mm = self._res_m * 1000.0
 
-        # --- Persistent map state ---
-        # Instead of keeping every historical scan/pose and re-raycasting
-        # the ENTIRE history on every new scan (which made this node get
-        # slower and heavier the longer a session ran), we now keep only:
-        #   - the current persistent occupancy grid (grown on demand)
-        #   - the previous local scan (needed for frame-to-frame ICP)
-        #   - the current accumulated global pose
-        # and integrate only the NEWEST scan into the grid each time.
-        self._grid = None                     # np.int8 array, created on first scan
-        self._origin_mm = np.array([0.0, 0.0])  # world mm coords of grid[0,0]'s corner
+        # Cuva postojecu mapu i dodaje novi sken na nju
+        self._grid = None                       # np.int8 array, napravljen na prvom skenu
+        self._origin_mm = np.array([0.0, 0.0])  # Koordinate pozicije (0.0, 0.0)
         self._current_pose = np.identity(3)
         self._last_local_scan = None
 
-        # Subscribers and Publishers
+        # Pretplacen na lidar_scan_node/scan, privatan topic
         self._scan_sub = self.create_subscription(LidarSweep, '/lidar_scan_node/scan', self._scan_callback, 10)
 
-        # FIX: was '~/map' (-> /slam_mapping_node/map), which path_planner_node
-        # never subscribes to. path_planner_node listens on plain 'map', so we
-        # publish there directly.
-        self._map_pub = self.create_publisher(OccupancyGrid, 'map', 10)
+        # Objavljuje na /map
+        self._map_pub = self.create_publisher(OccupancyGrid, '/map', 10)
 
-        self.get_logger().info("SLAM Mapping Node online. Processing map sweeps dynamically...")
+        self.get_logger().info("Mapiranje ukljuceno, obradjuje skenove")
 
     def _scan_callback(self, msg: LidarSweep):
         if len(msg.distances) == 0:
@@ -118,13 +101,9 @@ class SlamMappingNode(Node):
                     T_rel = icp(current_local, self._last_local_scan)
                     self._current_pose = self._current_pose @ T_rel
                 except Exception as e:
-                    # FIX: original code had no error handling around icp() here
-                    # (vector_deducer_node did, this one didn't). A degenerate
-                    # scan (too few points, no geometric structure) could crash
-                    # the whole node. We now log and skip integrating this scan
-                    # into the map rather than taking the node down.
+                    # Provera uspeha
                     self.get_logger().error(
-                        f"ICP failed on this scan, skipping map integration: {e}"
+                        f"ICP nije uspeo, preskace: {e}"
                     )
                     self._last_local_scan = current_local
                     return
@@ -133,12 +112,9 @@ class SlamMappingNode(Node):
             self._integrate_scan(current_local, self._current_pose, msg.header.frame_id)
 
         except Exception as e:
-            self.get_logger().error(f"Unexpected error while processing scan: {e}")
+            self.get_logger().error(f"Neocekivana greska tokom skena: {e}")
 
-    # ------------------------------------------------------------------
-    # Incremental map integration
-    # ------------------------------------------------------------------
-
+    # Inkrementalna integracija mape
     def _integrate_scan(self, local_pts, pose, frame_id):
         homo_pts = np.ones((local_pts.shape[0], 3))
         homo_pts[:, :2] = local_pts
@@ -169,15 +145,14 @@ class SlamMappingNode(Node):
 
             for fx, fy in bresenham_line(gx0, gy0, gx1, gy1):
                 if self._grid[fy, fx] != 100:
-                    self._grid[fy, fx] = 0  # Free space
+                    self._grid[fy, fx] = 0  # Slobodan prostor
 
-            self._grid[gy1, gx1] = 100  # Obstacle
+            self._grid[gy1, gx1] = 100  # Prepreka
 
         self._publish_map(frame_id)
 
     def _ensure_grid_covers(self, min_needed, max_needed):
-        """Grows the persistent grid (if necessary) to cover the requested
-        world-space bounding box, preserving existing data."""
+        # Povecavanje mape ukoliko je to potrebno
 
         if self._grid is None:
             width = max(int(np.ceil((max_needed[0] - min_needed[0]) / self._res_mm)), 1)
@@ -194,7 +169,7 @@ class SlamMappingNode(Node):
         new_max = np.maximum(cur_max, max_needed)
 
         if np.allclose(new_min, cur_min) and np.allclose(new_max, cur_max):
-            return  # existing grid already covers what we need
+            return  # Ako je grid dovoljan
 
         new_width = max(int(np.ceil((new_max[0] - new_min[0]) / self._res_mm)), 1)
         new_height = max(int(np.ceil((new_max[1] - new_min[1]) / self._res_mm)), 1)
@@ -227,7 +202,7 @@ class SlamMappingNode(Node):
         map_msg.data = self._grid.ravel().tolist()
 
         self._map_pub.publish(map_msg)
-        self.get_logger().info(f"Published updated map grid layout: {width}x{height} pixels.")
+        self.get_logger().info(f"Objavljuje mapu: {width}x{height} piksela.")
 
 
 def main(args=None):
